@@ -10,7 +10,7 @@ import fr.sigl.epita.imoe.minigrc.dao.exceptions.DAORequestException;
  *
  * @author Chris
  */
-public interface EvenementDAO {
+public interface EvenementDAOtp1 {
     /**
      * Retourne la liste des événements existants.
      *

@@ -3,7 +3,7 @@ package fr.sigl.epita.imoe.minigrc.dao.mock;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.sigl.epita.imoe.minigrc.dao.TypeEvenementDAO;
+import fr.sigl.epita.imoe.minigrc.dao.TypeEvenementDAOtp1;
 import fr.sigl.epita.imoe.minigrc.dao.exceptions.DAORequestException;
 import fr.sigl.epita.imoe.minigrc.bo.TypeEvenement;
 
@@ -12,7 +12,7 @@ import fr.sigl.epita.imoe.minigrc.bo.TypeEvenement;
  *
  * @author Chris
  */
-public class TypeEvenementDAOMock implements TypeEvenementDAO {
+public class TypeEvenementDAOtp1Mock implements TypeEvenementDAOtp1 {
     /**
      * Liste des types d'événements sous forme de mock.
      */
@@ -22,7 +22,7 @@ public class TypeEvenementDAOMock implements TypeEvenementDAO {
      * Constructeur par défaut permettant d'initialiser la
      * liste des événements avec des cas d'exemple.
      */
-    public TypeEvenementDAOMock() {
+    public TypeEvenementDAOtp1Mock() {
         super();
         types.add(new TypeEvenement("1", "Rendez-vous"));
         types.add(new TypeEvenement("2", "Anniversaire"));
@@ -37,7 +37,7 @@ public class TypeEvenementDAOMock implements TypeEvenementDAO {
      *
      * @return la liste des types.
      * @exception DAORequestException      Exception générique lors de l'accés à la base.
-     * @see TypeEvenementDAO#getTypesEvenements()
+     * @see TypeEvenementDAOtp1#getTypesEvenements()
      */
     @Override
     public List<TypeEvenement> getTypesEvenements() throws DAORequestException {
@@ -50,7 +50,7 @@ public class TypeEvenementDAOMock implements TypeEvenementDAO {
      * @param  id                           L'identifiant technique du type.
      * @return L'instance du type correspondant à l'identifiant technique.
      * @exception  DAORequestException      Exception générique lors de l'accés à la base.
-     * @see TypeEvenementDAO#getTypeEvenement(java.lang.String)
+     * @see TypeEvenementDAOtp1#getTypeEvenement(java.lang.String)
      */
     @Override
     public TypeEvenement getTypeEvenement(String id) throws DAORequestException {

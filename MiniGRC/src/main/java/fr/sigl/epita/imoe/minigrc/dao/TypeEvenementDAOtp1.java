@@ -10,7 +10,7 @@ import fr.sigl.epita.imoe.minigrc.bo.TypeEvenement;
  *
  * @author Chris
  */
-public interface TypeEvenementDAO {
+public interface TypeEvenementDAOtp1 {
     /**
      * Retourne la liste des types existants.
      *

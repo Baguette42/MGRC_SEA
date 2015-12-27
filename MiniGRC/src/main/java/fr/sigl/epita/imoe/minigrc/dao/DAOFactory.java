@@ -1,7 +1,7 @@
 package fr.sigl.epita.imoe.minigrc.dao;
 
-import fr.sigl.epita.imoe.minigrc.dao.mock.EvenementDAOMock;
-import fr.sigl.epita.imoe.minigrc.dao.mock.TypeEvenementDAOMock;
+import fr.sigl.epita.imoe.minigrc.dao.mock.EvenementDAOtp1Mock;
+import fr.sigl.epita.imoe.minigrc.dao.mock.TypeEvenementDAOtp1Mock;
 
 /**
  * Classe abstraite dont doivent hériter toutes les DAOFactory
@@ -17,11 +17,11 @@ public final class DAOFactory {
     /**
      * Instance du DAO pour les événements.
      */
-    private EvenementDAO evenementDAO;
+    private EvenementDAOtp1 evenementDAOtp1;
     /**
      * Instance du DAO pour les types d'événements.
      */
-    private TypeEvenementDAO typeEvenementDAO;
+    private TypeEvenementDAOtp1 typeEvenementDAOtp1;
 
     /**
      * Constructeur privé pour respecter le principe du singleton.
@@ -47,11 +47,11 @@ public final class DAOFactory {
      *
      * @return Une instance de EvenementDAO.
      */
-    public EvenementDAO getEvenementDAO() {
-        if (evenementDAO == null) {
-            evenementDAO = new EvenementDAOMock();
+    public EvenementDAOtp1 getEvenementDAO() {
+        if (evenementDAOtp1 == null) {
+            evenementDAOtp1 = new EvenementDAOtp1Mock();
         }
-        return evenementDAO;
+        return evenementDAOtp1;
     }
 
     /**
@@ -59,10 +59,10 @@ public final class DAOFactory {
      *
      * @return Une instance de TypeEvenementDAO.
      */
-    public TypeEvenementDAO getTypeEvenementDAO() {
-        if (typeEvenementDAO == null) {
-            typeEvenementDAO = new TypeEvenementDAOMock();
+    public TypeEvenementDAOtp1 getTypeEvenementDAO() {
+        if (typeEvenementDAOtp1 == null) {
+            typeEvenementDAOtp1 = new TypeEvenementDAOtp1Mock();
         }
-        return typeEvenementDAO;
+        return typeEvenementDAOtp1;
     }
 }

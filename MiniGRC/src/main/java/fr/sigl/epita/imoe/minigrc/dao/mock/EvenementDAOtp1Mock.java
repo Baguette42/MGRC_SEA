@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 
 import fr.sigl.epita.imoe.minigrc.bo.Evenement;
 import fr.sigl.epita.imoe.minigrc.dao.DAOFactory;
-import fr.sigl.epita.imoe.minigrc.dao.EvenementDAO;
-import fr.sigl.epita.imoe.minigrc.dao.TypeEvenementDAO;
+import fr.sigl.epita.imoe.minigrc.dao.EvenementDAOtp1;
+import fr.sigl.epita.imoe.minigrc.dao.TypeEvenementDAOtp1;
 import fr.sigl.epita.imoe.minigrc.dao.exceptions.DAORequestException;
 
 /**
@@ -17,11 +17,11 @@ import fr.sigl.epita.imoe.minigrc.dao.exceptions.DAORequestException;
  *
  * @author Chris
  */
-public class EvenementDAOMock implements EvenementDAO {
+public class EvenementDAOtp1Mock implements EvenementDAOtp1 {
     /**
      * Logger JUL.
      */
-    private static final Logger LOGGER = Logger.getLogger(EvenementDAOMock.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(EvenementDAOtp1Mock.class.getName());
     /**
      * Liste des événements sous forme de mock.
      */
@@ -35,9 +35,9 @@ public class EvenementDAOMock implements EvenementDAO {
      * Constructeur par défaut permettant d'initialiser la
      * liste des événements avec des cas d'exemple.
      */
-    public EvenementDAOMock() {
+    public EvenementDAOtp1Mock() {
         super();
-        TypeEvenementDAO typeDAO = DAOFactory.getInstance().getTypeEvenementDAO();
+        TypeEvenementDAOtp1 typeDAO = DAOFactory.getInstance().getTypeEvenementDAO();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         try {
             // Un premier événement
@@ -76,7 +76,7 @@ public class EvenementDAOMock implements EvenementDAO {
      *
      * @return la liste des événements.
      * @exception DAORequestException      Exception générique lors de l'accés à la base.
-     * @see EvenementDAO#getEvenements()
+     * @see EvenementDAOtp1#getEvenements()
      */
     @Override
     public List<Evenement> getEvenements() throws DAORequestException {
@@ -89,7 +89,7 @@ public class EvenementDAOMock implements EvenementDAO {
      * @param  id                           L'identifiant technique de l'événement.
      * @return L'instance de l'événement correspondant à l'identifiant technique.
      * @exception  DAORequestException      Exception générique lors de l'accés à la base.
-     * @see EvenementDAO#getEvenement(java.lang.String)
+     * @see EvenementDAOtp1#getEvenement(java.lang.String)
      */
     @Override
     public Evenement getEvenement(String id) throws DAORequestException {
@@ -109,7 +109,7 @@ public class EvenementDAOMock implements EvenementDAO {
      *
      * @param  evenement                    Une instance d'événement.
      * @exception  DAORequestException      Exception générique lors de l'accés à la base.
-     * @see EvenementDAO#updateEvenement(Evenement)
+     * @see EvenementDAOtp1#updateEvenement(Evenement)
      */
     @Override
     public void updateEvenement(Evenement evenement) throws DAORequestException {
@@ -130,7 +130,7 @@ public class EvenementDAOMock implements EvenementDAO {
      *
      * @param  evenement                    Une instance d'événement.
      * @exception  DAORequestException      Exception générique lors de l'accés à la base.
-     * @see EvenementDAO#insertEvenement(Evenement)
+     * @see EvenementDAOtp1#insertEvenement(Evenement)
      */
     @Override
     public void insertEvenement(Evenement evenement) throws DAORequestException {
@@ -144,7 +144,7 @@ public class EvenementDAOMock implements EvenementDAO {
      *
      * @param  evenement                    Une instance d'événement.
      * @exception  DAORequestException      Exception générique lors de l'accés à la base.
-     * @see EvenementDAO#deleteEvenement(Evenement)
+     * @see EvenementDAOtp1#deleteEvenement(Evenement)
      */
     @Override
     public void deleteEvenement(Evenement evenement) throws DAORequestException {
