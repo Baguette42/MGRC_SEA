@@ -30,16 +30,16 @@
                                     <tr>
                                         <td>Test</td>
                                         <td>
-                                            <a class="eventrow" href="edit?selectedEventId=1">Créer un e-mail avec ce panel</a>
+                                            <a class="eventrow" href="createemail?selectedEventId=1">Créer un e-mail avec ce panel</a>
                                         </td>
                                     </tr>
                                     <c:forEach var="panel" items="${panelList}">
                                         <tr>
                                             <td>
-                                                <a href="edit?selectedPanelId=${panel.id}">${panel.type}</a>
+                                                <a href="createemail?selectedPanelId=${panel.id}">${panel.name}</a>
                                             </td>
                                             <td>
-                                                <a class="eventrow" href="edit?selectedPanelId=${panel.id}">Créer un e-mail avec ce panel</a>
+                                                <a class="eventrow" href="createemail?selectedPanelId=${panel.id}">Créer un e-mail avec ce panel</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
