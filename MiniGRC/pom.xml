@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.sigl.imoe.tp</groupId>
+	<groupId>fr.sigl.epita.imoe.minigrc</groupId>
 	<artifactId>MiniGRC</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<name>MiniGRC</name>
 	<description>Structure MiniGRC</description>
@@ -13,6 +13,7 @@
         <javaee.api.version>7.0</javaee.api.version>
         <jstl.taglibs.version>1.2.5</jstl.taglibs.version>
         <xalan.version>2.7.1</xalan.version>
+        <hibernate.version>4.2.2.Final</hibernate.version>
     </properties>
 
     <dependencies>
@@ -42,6 +43,11 @@
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>
             <version>${xalan.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
         </dependency>
     </dependencies>
 

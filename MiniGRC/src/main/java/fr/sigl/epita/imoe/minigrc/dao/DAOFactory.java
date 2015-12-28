@@ -1,7 +1,8 @@
 package fr.sigl.epita.imoe.minigrc.dao;
 
-import fr.sigl.epita.imoe.minigrc.dao.mock.EvenementDAOtp1Mock;
-import fr.sigl.epita.imoe.minigrc.dao.mock.TypeEvenementDAOtp1Mock;
+import fr.sigl.epita.imoe.minigrc.dao.impl.ClientDAOImpl;
+import fr.sigl.epita.imoe.minigrc.dao.impl.EvenementDAOImpl;
+import fr.sigl.epita.imoe.minigrc.dao.impl.PanelDAOImpl;
 
 /**
  * Classe abstraite dont doivent hériter toutes les DAOFactory
@@ -15,13 +16,17 @@ public final class DAOFactory {
      */
     private static final DAOFactory INSTANCE = new DAOFactory();
     /**
+     * Instance du DAO pour les clients.
+     */
+    private ClientDAO clientDAO;
+    /**
      * Instance du DAO pour les événements.
      */
-    private EvenementDAOtp1 evenementDAOtp1;
+    private EvenementDAO evenementDAO;
     /**
-     * Instance du DAO pour les types d'événements.
+     * Instance du DAO pour les panels.
      */
-    private TypeEvenementDAOtp1 typeEvenementDAOtp1;
+    private PanelDAO panelDAO;
 
     /**
      * Constructeur privé pour respecter le principe du singleton.
@@ -47,22 +52,34 @@ public final class DAOFactory {
      *
      * @return Une instance de EvenementDAO.
      */
-    public EvenementDAOtp1 getEvenementDAO() {
-        if (evenementDAOtp1 == null) {
-            evenementDAOtp1 = new EvenementDAOtp1Mock();
+    public EvenementDAO getEvenementDAO() {
+        if (evenementDAO == null) {
+            evenementDAO = new EvenementDAOImpl();
         }
-        return evenementDAOtp1;
+        return evenementDAO;
     }
 
     /**
-     * Retourne l'implémentation associée à la factory du TypeEvenementDAO.
+     * Retourne l'implémentation associée à la factory du PanelDAO.
      *
-     * @return Une instance de TypeEvenementDAO.
+     * @return Une instance de PanelDAO.
      */
-    public TypeEvenementDAOtp1 getTypeEvenementDAO() {
-        if (typeEvenementDAOtp1 == null) {
-            typeEvenementDAOtp1 = new TypeEvenementDAOtp1Mock();
+    public PanelDAO getPanelDAO() {
+        if (panelDAO == null) {
+            panelDAO = new PanelDAOImpl();
         }
-        return typeEvenementDAOtp1;
+        return panelDAO;
+    }
+
+    /**
+     * Retourne l'implémentation associée à la factory du ClientDAO.
+     *
+     * @return Une instance de ClientDAO.
+     */
+    public ClientDAO getClientDAO() {
+        if (clientDAO == null) {
+            clientDAO = new ClientDAOImpl();
+        }
+        return clientDAO;
     }
 }

@@ -1,10 +1,8 @@
-// default package
 // Generated Dec 27, 2015 9:12:54 PM by Hibernate Tools 3.4.0.CR1
+package fr.sigl.epita.imoe.minigrc.dao;
 
 import java.util.List;
 import javax.naming.InitialContext;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
@@ -16,7 +14,7 @@ import org.hibernate.criterion.Example;
  */
 public class UserloginHome {
 
-	private static final Log log = LogFactory.getLog(UserloginHome.class);
+	/*private static final Log log = LogFactory.getLog(UserloginHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -112,5 +110,5 @@ public class UserloginHome {
 			log.error("find by example failed", re);
 			throw re;
 		}
-	}
+	}*/
 }

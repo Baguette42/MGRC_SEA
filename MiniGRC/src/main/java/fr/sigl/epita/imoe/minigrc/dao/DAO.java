@@ -1,3 +1,5 @@
+package fr.sigl.epita.imoe.minigrc.dao;
+
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
@@ -12,7 +14,7 @@ import java.util.Map;
 /**
  * Created by Chaf on 12/27/2015.
  */
-public class Main {
+public class DAO {
     private static final SessionFactory ourSessionFactory;
     private static final ServiceRegistry serviceRegistry;
 

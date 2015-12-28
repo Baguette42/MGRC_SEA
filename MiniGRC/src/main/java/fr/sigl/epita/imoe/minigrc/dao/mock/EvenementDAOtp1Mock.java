@@ -37,7 +37,7 @@ public class EvenementDAOtp1Mock implements EvenementDAOtp1 {
      */
     public EvenementDAOtp1Mock() {
         super();
-        TypeEvenementDAOtp1 typeDAO = DAOFactory.getInstance().getTypeEvenementDAO();
+        /*TypeEvenementDAOtp1 typeDAO = DAOFactory.getInstance().getTypeEvenementDAOtp1();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         try {
             // Un premier événement
@@ -68,7 +68,7 @@ public class EvenementDAOtp1Mock implements EvenementDAOtp1 {
             insertEvenement(evt);
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Problème lors de l'initialisation du mock pour les événements. Cause : " + e.getMessage(), e);
-        }
+        }*/
     }
 
     /**
