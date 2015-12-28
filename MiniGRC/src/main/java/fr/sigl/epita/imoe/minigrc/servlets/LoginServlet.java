@@ -41,9 +41,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
-    	RequestDispatcher requestD;
-    	
-    	requestD = request.getRequestDispatcher("login_MINIGRC.jsp");
-    	requestD.forward(request, response);
+    	request.getRequestDispatcher("login_MINIGRC.jsp").forward(request, response);
     }
 }

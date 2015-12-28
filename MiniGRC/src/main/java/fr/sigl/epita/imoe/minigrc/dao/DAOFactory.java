@@ -3,6 +3,7 @@ package fr.sigl.epita.imoe.minigrc.dao;
 import fr.sigl.epita.imoe.minigrc.dao.impl.ClientDAOImpl;
 import fr.sigl.epita.imoe.minigrc.dao.impl.EvenementDAOImpl;
 import fr.sigl.epita.imoe.minigrc.dao.impl.PanelDAOImpl;
+import fr.sigl.epita.imoe.minigrc.dao.impl.UserloginDAOImpl;
 
 /**
  * Classe abstraite dont doivent hériter toutes les DAOFactory
@@ -27,6 +28,10 @@ public final class DAOFactory {
      * Instance du DAO pour les panels.
      */
     private PanelDAO panelDAO;
+    /**
+     * Instance du DAO pour les userlogins.
+     */
+    private UserloginDAO userloginDAO;
 
     /**
      * Constructeur privé pour respecter le principe du singleton.
@@ -81,5 +86,17 @@ public final class DAOFactory {
             clientDAO = new ClientDAOImpl();
         }
         return clientDAO;
+    }
+
+    /**
+     * Retourne l'implémentation associée à la factory du UserloginDAO.
+     *
+     * @return Une instance de UserloginDAO.
+     */
+    public UserloginDAO getUserloginDAO() {
+        if (userloginDAO == null) {
+            userloginDAO = new UserloginDAOImpl();
+        }
+        return userloginDAO;
     }
 }

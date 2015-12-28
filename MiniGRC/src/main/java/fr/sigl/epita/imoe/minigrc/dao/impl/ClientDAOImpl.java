@@ -24,24 +24,11 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext().lookup("SessionFactory");
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, "Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException("Could not locate SessionFactory in JNDI");
-		}
-	}
-
-    public ClientDAOImpl() {
-        super();
-    }
-
     @Override
 	public void persist(ClientEntity transientInstance) {
 		LOGGER.log(Level.INFO, "persisting Client instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			sessionFactory.openSession().persist(transientInstance);
 			LOGGER.log(Level.INFO, "persist successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "persist failed", re);
@@ -53,7 +40,7 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 	public void attachDirty(ClientEntity instance) {
 		LOGGER.log(Level.INFO, "attaching dirty Client instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			sessionFactory.openSession().saveOrUpdate(instance);
 			LOGGER.log(Level.INFO, "attach successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -65,7 +52,7 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 	public void attachClean(ClientEntity instance) {
 		LOGGER.log(Level.INFO, "attaching clean Client instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			sessionFactory.openSession().lock(instance, LockMode.NONE);
 			LOGGER.log(Level.INFO, "attach successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -77,7 +64,7 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 	public void delete(ClientEntity persistentInstance) {
 		LOGGER.log(Level.INFO, "deleting Client instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			sessionFactory.openSession().delete(persistentInstance);
 			LOGGER.log(Level.INFO, "delete successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "delete failed", re);
@@ -89,7 +76,7 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 	public ClientEntity merge(ClientEntity detachedInstance) {
 		LOGGER.log(Level.SEVERE, "merging Client instance");
 		try {
-			ClientEntity result = (ClientEntity) sessionFactory.getCurrentSession().merge(detachedInstance);
+			ClientEntity result = (ClientEntity) sessionFactory.openSession().merge(detachedInstance);
 			LOGGER.log(Level.INFO, "merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -102,7 +89,7 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 	public ClientEntity findById(int id) {
 		LOGGER.log(Level.INFO, "getting Client instance with id: " + id);
 		try {
-			ClientEntity instance = (ClientEntity) sessionFactory.getCurrentSession().get("Client", id);
+			ClientEntity instance = (ClientEntity) sessionFactory.openSession().get(ClientEntity.class, id);
 			if (instance == null) {
 				LOGGER.log(Level.INFO, "get successful, no instance found");
 			} else {
@@ -119,7 +106,7 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 	public List findByExample(ClientEntity instance) {
 		LOGGER.log(Level.INFO, "finding Client instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession().createCriteria("Client").add(Example.create(instance))
+			List results = sessionFactory.openSession().createCriteria(ClientEntity.class).add(Example.create(instance))
 					.list();
 			LOGGER.log(Level.INFO, "find by example successful, result size: " + results.size());
 			return results;

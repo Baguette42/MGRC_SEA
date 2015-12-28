@@ -1,5 +1,7 @@
 package fr.sigl.epita.imoe.minigrc.servlets;
 
+import fr.sigl.epita.imoe.minigrc.bo.UserloginBO;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -40,10 +42,13 @@ public class MainpageServlet extends HttpServlet {
      */
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-    	RequestDispatcher requestD;
-    	
-    	requestD = request.getRequestDispatcher("mainpage_MINIGRC.jsp");
-    	requestD.forward(request, response);
+
+        UserloginBO userloginBO = new UserloginBO();
+        String login = request.getParameter("login_form");
+        String password = request.getParameter("password_form");
+        if (userloginBO.checkLogin(login, password))
+            request.getRequestDispatcher("mainpage_MINIGRC.jsp").forward(request,response);
+        else
+            response.sendRedirect("/login");
     }
 }

@@ -2,14 +2,9 @@ package fr.sigl.epita.imoe.minigrc.dao;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
-import org.hibernate.Session;
-import org.hibernate.Query;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
-
-import java.util.Map;
 
 /**
  * Created by Chaf on 12/27/2015.
@@ -30,11 +25,11 @@ public class DAO {
         }
     }
 
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
+    public static SessionFactory getSessionFactory() throws HibernateException {
+        return ourSessionFactory;//.openSession();
     }
 
-    public static void main(final String[] args) throws Exception {
+    /*public static void main(final String[] args) throws Exception {
         final Session session = getSession();
         try {
             System.out.println("querying all the managed entities...");
@@ -51,5 +46,5 @@ public class DAO {
         } finally {
             session.close();
         }
-    }
+    }*/
 }

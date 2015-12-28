@@ -6,6 +6,9 @@
     <session-factory>
         <property name="connection.url">jdbc:postgresql://localhost:5432/minigrc</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>
         <mapping class="fr.sigl.epita.imoe.minigrc.beans.ClientEntity"/>
         <mapping class="fr.sigl.epita.imoe.minigrc.beans.EvenementEntity"/>
         <mapping class="fr.sigl.epita.imoe.minigrc.beans.PanelEntity"/>
