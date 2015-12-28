@@ -1,6 +1,7 @@
 package fr.sigl.epita.imoe.minigrc.beans;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "evenement", schema = "public", catalog = "minigrc")
-public class EvenementEntity {
+public class EvenementEntity implements Serializable {
     private int eventId;
     private String eventType;
     private Date eventDate;
@@ -18,6 +19,8 @@ public class EvenementEntity {
     private String eventDescription;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="evenement_event_id_seq")
+    @SequenceGenerator(name="evenement_event_id_seq", sequenceName="evenement_event_id_seq", allocationSize = 1)
     @Column(name = "event_id")
     public int getEventId() {
         return eventId;

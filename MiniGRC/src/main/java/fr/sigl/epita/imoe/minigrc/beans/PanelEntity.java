@@ -1,13 +1,14 @@
 package fr.sigl.epita.imoe.minigrc.beans;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Chaf on 12/27/2015.
  */
 @Entity
 @Table(name = "panel", schema = "public", catalog = "minigrc")
-public class PanelEntity {
+public class PanelEntity implements Serializable {
     private int panelId;
     private String panelNom;
     private String panelAgemini;
@@ -16,6 +17,8 @@ public class PanelEntity {
     private String panelProfil;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="panel_panel_id_seq")
+    @SequenceGenerator(name="panel_panel_id_seq", sequenceName="panel_panel_id_seq", allocationSize = 1)
     @Column(name = "panel_id")
     public int getPanelId() {
         return panelId;

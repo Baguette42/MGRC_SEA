@@ -29,9 +29,9 @@
 		<table border="1" cellpadding="10" width="40%">
 			<thead bgcolor="B8D2FF">
 				<tr>
-					<th>Civilité</th>
+					<th>CivilitÃ©</th>
 					<th>Nom</th>
-					<th>Prénom</th>
+					<th>PrÃ©nom</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,7 +40,7 @@
 					</td>
 					<td><a class="clientrow" href="client?selectedclientId=1">Flantier</a>
 					</td>
-					<td><a class="clientrow" href="client?selectedclientId=1">Noël</a>
+					<td><a class="clientrow" href="client?selectedclientId=1">NoÃ«l</a>
 					</td>
 				</tr>
 				<c:forEach var="client" items="${clientList}">

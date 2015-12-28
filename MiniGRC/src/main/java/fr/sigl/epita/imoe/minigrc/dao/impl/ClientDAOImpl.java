@@ -4,13 +4,13 @@ package fr.sigl.epita.imoe.minigrc.dao.impl;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.naming.InitialContext;
-
 import fr.sigl.epita.imoe.minigrc.beans.ClientEntity;
 import fr.sigl.epita.imoe.minigrc.dao.ClientDAO;
 import fr.sigl.epita.imoe.minigrc.dao.DAO;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 
 /**
@@ -27,8 +27,12 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
     @Override
 	public void persist(ClientEntity transientInstance) {
 		LOGGER.log(Level.INFO, "persisting Client instance");
+        Transaction transaction = null;
 		try {
-			sessionFactory.openSession().persist(transientInstance);
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.persist(transientInstance);
+            transaction.commit();
 			LOGGER.log(Level.INFO, "persist successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "persist failed", re);

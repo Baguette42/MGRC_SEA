@@ -41,6 +41,7 @@ public class ClientlistServlet extends HttpServlet {
      */
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         Cookie[] cookies = request.getCookies();
         Cookie token = null;
         for (Cookie c : cookies)
@@ -53,6 +54,5 @@ public class ClientlistServlet extends HttpServlet {
             request.setAttribute("errorMessage", "Vous devez être connecté pour accéder à cette page.");
             request.getRequestDispatcher("login_MINIGRC.jsp").forward(request, response);
         }
-
     }
 }

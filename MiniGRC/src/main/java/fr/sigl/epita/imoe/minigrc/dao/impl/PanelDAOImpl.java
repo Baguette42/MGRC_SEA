@@ -10,7 +10,9 @@ import fr.sigl.epita.imoe.minigrc.beans.PanelEntity;
 import fr.sigl.epita.imoe.minigrc.dao.DAO;
 import fr.sigl.epita.imoe.minigrc.dao.PanelDAO;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 
 /**
@@ -26,8 +28,12 @@ public class PanelDAOImpl extends DAO implements PanelDAO {
 
 	public void persist(PanelEntity transientInstance) {
 		LOGGER.log(Level.INFO, "persisting PanelEntity instance");
+        Transaction transaction = null;
 		try {
-			sessionFactory.openSession().persist(transientInstance);
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.persist(transientInstance);
+            transaction.commit();
 			LOGGER.log(Level.INFO, "persist successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "persist failed", re);

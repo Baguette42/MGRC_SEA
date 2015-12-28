@@ -14,7 +14,7 @@
                 </table>
                 <table cellpadding="10">
                     <tr>
-                        <td>Civilité:</td>
+                        <td>CivilitÃ©:</td>
                         <td><input name="client_civilite" value="" /></td>
                         <td>Date de naissance:</td>
                         <td>
@@ -24,7 +24,7 @@
                     <tr>
                         <td>Nom:</td>
                         <td><input name="client_nom" value="" /></td>
-                        <td>Prénom:</td>
+                        <td>PrÃ©nom:</td>
                         <td><input name="client_prenom" value="" /></td>
                     </tr>
                     <tr>
@@ -37,37 +37,35 @@
                         <td>E-mail:</td>
                         <td><input name="client_email" value="" /></td>
                     </tr>
-					<tr>
-						<td>Facebook:</td>
-						<td><input name="client_facebook" value="" /></td>
-						<td>Twitter:</td>
-						<td><input name="client_twitter" value="" /></td>
-					</tr>
+                    <tr>
+                        <td>Facebook:</td>
+                        <td><input name="client_facebook" value="" /></td>
+                        <td>Twitter:</td>
+                        <td><input name="client_twitter" value="" /></td>
+                    </tr>
 
-					<tr>
-						<td>LinkedIn:</td>
-						<td><input name="client_linkedin" value="" /></td>
-					</tr>
-					<tr>
-						<td>Prospect/Client:</td>
-						<td><select name="client_type">
-								<option value="prospect">Prospect</option>
-								<option value="client">Client</option>
-						</select></td>
-						<td>Region geographique:</td>
-						<td><input name="client_region" value="" /></td>
-					</tr>
-					<tr>
-						<td>Refus e-mailing?:</td>
-						<td><input type="checkbox" name="client_emailing"
-							id="emailRefus" name="isVerified" /></td>
-					</tr>
-
-				</table>
+                    <tr>
+                        <td>LinkedIn:</td>
+                        <td><input name="client_linkedin" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Prospect/Client:</td>
+                        <td><select name="client_type">
+                            <option value="prospect">Prospect</option>
+                            <option value="client">Client</option>
+                        </select></td>
+                        <td>Region geographique:</td>
+                        <td><input name="client_region" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Refus e-mailing?:</td>
+                        <td><input type="checkbox" name="client_emailing" id="emailRefus"/></td>
+                    </tr>
+                </table>
                 <table>
                     <tr>
                         <td>
-                                <input style="margin: 30px" type="submit" value="Valider"/>
+                            <input style="margin: 30px" type="submit" value="Valider"/>
                         </td>
                     </tr>
                 </table>
