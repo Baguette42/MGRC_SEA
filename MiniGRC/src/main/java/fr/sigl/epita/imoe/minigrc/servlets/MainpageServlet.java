@@ -50,8 +50,9 @@ public class MainpageServlet extends HttpServlet {
         if (userloginBO.checkLogin(login, password)) {
             response.addCookie(new Cookie("user", login));
             request.getRequestDispatcher("mainpage_MINIGRC.jsp").forward(request, response);
+        } else {
+            request.setAttribute("errorMessage", "Nom d'utilisateur ou mot de passe incorrect.");
+            request.getRequestDispatcher("login_MINIGRC.jsp").forward(request, response);
         }
-        else
-            response.sendRedirect("/login");
     }
 }

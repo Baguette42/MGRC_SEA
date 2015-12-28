@@ -28,4 +28,7 @@
             </tr>
         </form>
     </table>
+
+    <div style="color: #FF0000;">${errorMessage}</div>
+
     <center/><%@include file="includes/footer.jsp" %>

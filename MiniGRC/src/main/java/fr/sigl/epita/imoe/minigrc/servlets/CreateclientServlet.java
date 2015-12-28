@@ -50,7 +50,8 @@ public class CreateclientServlet extends HttpServlet {
         if (token != null) {
             request.getRequestDispatcher("createClient_MINIGRC.jsp").forward(request, response);
         } else {
-            response.sendRedirect("/login");
+            request.setAttribute("errorMessage", "Vous devez être connecté pour accéder à cette page.");
+            request.getRequestDispatcher("login_MINIGRC.jsp").forward(request, response);
         }
 
     }
