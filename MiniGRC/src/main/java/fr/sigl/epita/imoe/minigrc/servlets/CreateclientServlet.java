@@ -1,22 +1,15 @@
-package fr.sigl.imoe.servlet.tp.servlets;
+package fr.sigl.epita.imoe.minigrc.servlets;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Logger;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import fr.sigl.imoe.servlet.tp.dao.DAOFactory;
-import fr.sigl.imoe.servlet.tp.dao.EvenementDAO;
-import fr.sigl.imoe.servlet.tp.dao.exceptions.DAORequestException;
-import fr.sigl.imoe.servlet.tp.bo.Evenement;
-
 
 /**
  * Servlet permettant de gerer le login
@@ -47,10 +40,18 @@ public class CreateclientServlet extends HttpServlet {
      */
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-    	RequestDispatcher requestD;
-    	
-    	requestD = request.getRequestDispatcher("createClient_MINIGRC.jsp");
-    	requestD.forward(request, response);
+
+        Cookie[] cookies = request.getCookies();
+        Cookie token = null;
+        for (Cookie c : cookies)
+            if (c.getName().equals("user"))
+                token = c;
+
+        if (token != null) {
+            request.getRequestDispatcher("createClient_MINIGRC.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("/login");
+        }
+
     }
 }

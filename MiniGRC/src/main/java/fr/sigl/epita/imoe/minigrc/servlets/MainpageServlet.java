@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,8 +47,10 @@ public class MainpageServlet extends HttpServlet {
         UserloginBO userloginBO = new UserloginBO();
         String login = request.getParameter("login_form");
         String password = request.getParameter("password_form");
-        if (userloginBO.checkLogin(login, password))
-            request.getRequestDispatcher("mainpage_MINIGRC.jsp").forward(request,response);
+        if (userloginBO.checkLogin(login, password)) {
+            response.addCookie(new Cookie("user", login));
+            request.getRequestDispatcher("mainpage_MINIGRC.jsp").forward(request, response);
+        }
         else
             response.sendRedirect("/login");
     }

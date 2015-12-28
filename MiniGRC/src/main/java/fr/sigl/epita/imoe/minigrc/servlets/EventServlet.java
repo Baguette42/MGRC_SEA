@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,10 +41,17 @@ public class EventServlet extends HttpServlet {
      */
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-    	RequestDispatcher requestD;
-    	
-    	requestD = request.getRequestDispatcher("event_MINIGRC.jsp");
-    	requestD.forward(request, response);
+
+        Cookie[] cookies = request.getCookies();
+        Cookie token = null;
+        for (Cookie c : cookies)
+            if (c.getName().equals("user"))
+                token = c;
+
+        if (token != null) {
+            request.getRequestDispatcher("event_MINIGRC.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("/login");
+        }
     }
 }
