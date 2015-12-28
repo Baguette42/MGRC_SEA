@@ -1,7 +1,7 @@
 <%@include file="includes/header.jsp" %>
 <center>
     <table cellpadding="10">
-		<form action="search">
+		<form action="clientlist">
 			<tr>
 				<td>Nom :</td>
 				<td><input name="lastname_searchform" value="" /></td>
@@ -29,27 +29,19 @@
 		<table border="1" cellpadding="10" width="40%">
 			<thead bgcolor="B8D2FF">
 				<tr>
-					<th>Civilité</th>
+					<th>Civilite</th>
 					<th>Nom</th>
-					<th>Prénom</th>
+					<th>Prenom</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td><a class="clientrow" href="client?selectedclientId=1">M.</a>
-					</td>
-					<td><a class="clientrow" href="client?selectedclientId=1">Flantier</a>
-					</td>
-					<td><a class="clientrow" href="client?selectedclientId=1">Noël</a>
-					</td>
-				</tr>
-				<c:forEach var="client" items="${clientList}">
+            <c:forEach var="client" items="${clientList}">
 					<tr>
-						<td><a href="client?selectedclientId=${client.id}">${client.civilite}</a>
+						<td><a href="client?selectedClientId=${client.clientId}">${client.clientCivilite}</a>
 						</td>
-						<td><a href="client?selectedclientId=${client.id}">${client.nom}</a>
+						<td><a href="client?selectedClientId=${client.clientId}">${client.clientNom}</a>
 						</td>
-						<td><a href="client?selectedclientId=${client.id}">${client.prenom}</a>
+						<td><a href="client?selectedClientId=${client.clientId}">${client.clientPrenom}</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -58,4 +50,5 @@
 		</tr>
 </table>
     
-</center><%@include file="includes/footer.jsp"%>
+</center>
+<%@include file="includes/footer.jsp"%>

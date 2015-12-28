@@ -1,9 +1,11 @@
 package fr.sigl.epita.imoe.minigrc.servlets;
 
+import fr.sigl.epita.imoe.minigrc.beans.ClientEntity;
+import fr.sigl.epita.imoe.minigrc.bo.ClientBO;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -49,6 +51,9 @@ public class ClientServlet extends HttpServlet {
                 token = c;
 
         if (token != null) {
+            ClientBO clientBO = new ClientBO();
+            ClientEntity clientEntity = clientBO.getClient(request.getParameter("selectedClientId"));
+            request.setAttribute("client", clientEntity);
             request.getRequestDispatcher("client_MINIGRC.jsp").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Vous devez être connecté pour accéder à cette page.");

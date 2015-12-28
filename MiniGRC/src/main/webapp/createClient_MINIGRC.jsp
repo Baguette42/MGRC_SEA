@@ -14,9 +14,14 @@
                 </table>
                 <table cellpadding="10">
                     <tr>
-                        <td>Civilité:</td>
-                        <td><input name="client_civilite" value="" /></td>
-                        <td>Date de naissance:</td>
+                        <td>Civilite:</td>
+                        <td>
+                            <select name="client_civilite">
+                                <option value="Monsieur">Monsieur</option>
+                                <option value="Madame">Madame</option>
+                            </select>
+                        </td>
+                        <td>Date de naissance (aaaa-mm-jj):</td>
                         <td>
                             <input type="date" name="client_date" value="">
                         </td>
@@ -24,7 +29,7 @@
                     <tr>
                         <td>Nom:</td>
                         <td><input name="client_nom" value="" /></td>
-                        <td>Prénom:</td>
+                        <td>Prenom:</td>
                         <td><input name="client_prenom" value="" /></td>
                     </tr>
                     <tr>
@@ -43,19 +48,27 @@
                         <td>Twitter:</td>
                         <td><input name="client_twitter" value="" /></td>
                     </tr>
-
                     <tr>
                         <td>LinkedIn:</td>
                         <td><input name="client_linkedin" value="" /></td>
                     </tr>
                     <tr>
                         <td>Prospect/Client:</td>
-                        <td><select name="client_type">
-                            <option value="prospect">Prospect</option>
-                            <option value="client">Client</option>
-                        </select></td>
+                        <td>
+                            <select name="client_type">
+                                <option value="prospect">Prospect</option>
+                                <option value="client">Client</option>
+                            </select>
+                        </td>
                         <td>Region geographique:</td>
-                        <td><input name="client_region" value="" /></td>
+                        <td>
+                            <select name="client_region">
+                                <option value="grand sud">Grand Sud</option>
+                                <option value="grand ouest">Grand Ouest</option>
+                                <option value="grand est">Grand Est</option>
+                                <option value="grand nord">Grand Nord</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>Refus e-mailing?:</td>

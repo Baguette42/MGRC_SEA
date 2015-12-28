@@ -1,13 +1,10 @@
 package fr.sigl.epita.imoe.minigrc.servlets;
 
-import fr.sigl.epita.imoe.minigrc.beans.ClientEntity;
-import fr.sigl.epita.imoe.minigrc.dao.DAOFactory;
+import fr.sigl.epita.imoe.minigrc.bo.ClientBO;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.logging.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -61,22 +58,20 @@ public class CreateclientServlet extends HttpServlet {
                 request.getRequestDispatcher("login_MINIGRC.jsp").forward(request, response);
             }
         } else if (method.equals("POST")) {
-            ClientEntity newClient = new ClientEntity();
-            newClient.setClientCivilite(request.getParameter("client_civilite"));
-            newClient.setClientNom(request.getParameter("client_nom"));
-            newClient.setClientPrenom(request.getParameter("client_prenom"));
-            newClient.setClientNaissance(Date.valueOf(request.getParameter("client_date")));
-            newClient.setClientAdresse(request.getParameter("client_adresse"));
-            newClient.setClientTelephone(request.getParameter("client_telephone"));
-            newClient.setClientEmail(request.getParameter("client_email"));
-            newClient.setClientFacebook(request.getParameter("client_facebook"));
-            newClient.setClientTwitter(request.getParameter("client_twitter"));
-            newClient.setClientLinkedin(request.getParameter("client_linkedin"));
-            newClient.setClientProfil(request.getParameter("client_type"));
-            newClient.setClientRegion(request.getParameter("client_region"));
-            newClient.setClientEmailrefus(Boolean.valueOf(request.getParameter("client_emailing")));
-
-            DAOFactory.getInstance().getClientDAO().persist(newClient);
+            ClientBO clientBO = new ClientBO();
+            clientBO.createClient(request.getParameter("client_civilite"),
+                    request.getParameter("client_nom"),
+                    request.getParameter("client_prenom"),
+                    request.getParameter("client_date"),
+                    request.getParameter("client_adresse"),
+                    request.getParameter("client_telephone"),
+                    request.getParameter("client_email"),
+                    request.getParameter("client_facebook"),
+                    request.getParameter("client_twitter"),
+                    request.getParameter("client_linkedin"),
+                    request.getParameter("client_type"),
+                    request.getParameter("client_region"),
+                    request.getParameter("client_emailing"));
 
             request.getRequestDispatcher("clientlist_MINIGRC.jsp").forward(request, response);
         }
