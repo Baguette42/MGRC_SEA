@@ -30,9 +30,6 @@
                         <td>${client.prenom}</td>
                     </tr>
                     <tr>
-                        <td>Images*:</td>
-                    </tr>
-                    <tr>
                         <td>Adresse:</td>
                         <td colspan=3>${client.adresse}</td>
                     </tr>
