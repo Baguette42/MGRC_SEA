@@ -19,11 +19,19 @@
             </tr>
         </form>
         <tr>
+			<td>
+				<form action="createevent" method="get">
+					<button type="submit" id="createEventButton">Ajouter un évènement</button>
+				</form>
+			</td>
+		</tr>
+        
+        <tr>
             <table cellpadding="10">
                 <tr>
                     <td>
                         <center style="font-size: 16px">
-                            <b>Evènements clients</b>
+                            <b>Evènements</b>
                         </center>
                     </td>
                 </tr>
