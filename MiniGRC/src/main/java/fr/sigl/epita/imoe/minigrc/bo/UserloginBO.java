@@ -12,27 +12,28 @@ import java.util.List;
  */
 public class UserloginBO {
 
-    public String checkLogin(String login, String password) {
+    public String[] checkLogin(String login, String password) {
         UserloginEntity userlogin = new UserloginEntity();
         userlogin.setUserLogin(login);
         userlogin.setUserPassword(password);
 
+        String[] regionAndLastConnexion = new String[2];
+
         if (null == login && null == password)
-            return null;
+            return regionAndLastConnexion;
 
         List userloginList = DAOFactory.getInstance().getUserloginDAO().findByExample(userlogin);
-
-        String region = null;
 
         if (!userloginList.isEmpty()) {
             UserloginEntity userloginEntity = new UserloginEntity();
             userloginEntity = (UserloginEntity) userloginList.get(0);
-            region = userloginEntity.getUserRegion();
+            regionAndLastConnexion[0] = userloginEntity.getUserRegion();
+            regionAndLastConnexion[1] = userloginEntity.getUserLastconnexion().toString();
             userloginEntity.setUserLastconnexion(new Date(Calendar.getInstance().getTime().getTime()));
             DAOFactory.getInstance().getUserloginDAO().merge(userloginEntity);
         }
 
-        return region;
+        return regionAndLastConnexion;
     }
 
 }

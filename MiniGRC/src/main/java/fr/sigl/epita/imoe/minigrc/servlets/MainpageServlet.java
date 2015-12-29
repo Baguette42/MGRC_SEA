@@ -48,14 +48,20 @@ public class MainpageServlet extends HttpServlet {
 
         Cookie[] cookies = request.getCookies();
         Cookie token = null;
+        Cookie region = null;
+        Cookie lastConnexion = null;
         for (Cookie c : cookies) {
             if (c.getName().equals("user"))
                 token = c;
+            if (c.getName().equals("region"))
+                region = c;
+            if (c.getName().equals("lastConnexion"))
+                lastConnexion = c;
         }
 
         if (null != token) {
             ClientBO clientBO = new ClientBO();
-            List clientList = clientBO.getNewClients(token.getValue());
+            List clientList = clientBO.getNewClients(region.getValue(), lastConnexion.getValue());
             request.setAttribute("clientList", clientList);
 
             EvenementBO evenementBO = new EvenementBO();

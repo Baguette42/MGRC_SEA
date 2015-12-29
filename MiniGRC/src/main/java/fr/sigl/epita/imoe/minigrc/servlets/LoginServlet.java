@@ -60,8 +60,11 @@ public class LoginServlet extends HttpServlet {
             String login = request.getParameter("login_form");
             String password = request.getParameter("password_form");
             UserloginBO userloginBO = new UserloginBO();
-            String region = userloginBO.checkLogin(login, password);
+            String[] regionAndLastConnexion = userloginBO.checkLogin(login, password);
+            String region = regionAndLastConnexion[0];
+            String lastConnexion = regionAndLastConnexion[1];
             if (region != null) {
+                response.addCookie(new Cookie("lastConnexion", lastConnexion));
                 response.addCookie(new Cookie("user", login));
                 response.addCookie(new Cookie("region", region));
                 response.sendRedirect("mainpage");
