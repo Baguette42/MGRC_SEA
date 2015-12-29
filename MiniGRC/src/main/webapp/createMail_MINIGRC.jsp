@@ -34,8 +34,9 @@
             <tr>
                 <td colspan="4">
             	 <textarea rows="30" cols="80" name="message">Bonjour &ltnom&gt,
-                     Cordialement,
-                     MiniGRC
+
+Cordialement,
+MiniGRC
                  </textarea>
                 </td>
             </tr>
