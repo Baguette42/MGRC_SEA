@@ -83,4 +83,13 @@
                     </tr>
                 </table>
             </form>
+            	<form action="clientlist">
+		<HR>
+		<table>
+			<tr>
+				<td><input style="margin: 30px" type="submit"
+					value="Retour à la liste des clients" /></td>
+			</tr>
+		</table>
+	</form>
         </center>

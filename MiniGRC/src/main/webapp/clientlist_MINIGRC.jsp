@@ -49,6 +49,15 @@
 		</table>
 		</tr>
 </table>
-    
+	<form action="mainpage">
+		<HR>
+		<table>
+			<tr>
+				<td><input style="margin: 30px" type="submit"
+					value="Retour à l'accueil" /></td>
+			</tr>
+		</table>
+	</form>
+
 </center>
 <%@include file="includes/footer.jsp"%>

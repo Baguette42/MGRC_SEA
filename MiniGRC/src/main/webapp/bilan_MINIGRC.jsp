@@ -1,6 +1,6 @@
 <%@include file="includes/header.jsp"%>
 <center>
-    <form action="create_tag">
+    <form action="mainpage">
         <input type="hidden" id="isOwner" value="${isOwner}"/>
         <input type="hidden" id="isAdmin" value="${isAdmin}" }/>
         <table>
@@ -12,19 +12,28 @@
                 </td>
             </tr>
         </table>
-        <table cellpadding="10">
-            <tr>
-                <td>Nombre de clients sans adresse email valide:</td>
-                <td>${bilan.clientsMailNonValides}</td>
-            </tr>
-            <tr>
-                <td>Données manquantes pour remplacement:</td>
-                <td>${bilan.donnéesManquantes}</td>
-            </tr>
-            <tr>
-                <td>Nombres de mails envoyés:</td>
-                <td>${bilan.mailsEnvoyés}</td>
-            </tr>
-        </table>
-    </form>
+		<table cellpadding="10">
+			<tr>
+				<td>Nombre de clients sans adresse email valide:</td>
+				<td>${bilan.clientsMailNonValides}</td>
+			</tr>
+			<tr>
+				<td>Données manquantes pour remplacement:</td>
+				<td>${bilan.donnéesManquantes}</td>
+			</tr>
+			<tr>
+				<td>Nombres de mails envoyés:</td>
+				<td>${bilan.mailsEnvoyés}</td>
+			</tr>
+
+			<tr>
+		</table>
+		<HR>
+		<table>
+			<tr>
+				<td><input style="margin: 30px" type="submit"
+					value="Retour à l'accueil" /></td>
+			</tr>
+		</table>
+	</form>
 </center><%@include file="includes/footer.jsp"%>

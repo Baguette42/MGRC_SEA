@@ -35,4 +35,13 @@
             <td>${event.eventDescription}</td>
         </tr>
     </table>
+        	<form action="eventlist">
+		<HR>
+		<table>
+			<tr>
+				<td><input style="margin: 30px" type="submit"
+					value="Retour à la liste des évènements" /></td>
+			</tr>
+		</table>
+	</form>
 </center><%@include file="includes/footer.jsp"%>
