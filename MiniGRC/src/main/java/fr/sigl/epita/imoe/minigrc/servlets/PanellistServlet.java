@@ -1,6 +1,9 @@
 package fr.sigl.epita.imoe.minigrc.servlets;
 
+import fr.sigl.epita.imoe.minigrc.bo.PanelBO;
+
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -44,11 +47,18 @@ public class PanellistServlet extends HttpServlet {
 
         Cookie[] cookies = request.getCookies();
         Cookie token = null;
-        for (Cookie c : cookies)
+        Cookie region = null;
+        for (Cookie c : cookies) {
             if (c.getName().equals("user"))
                 token = c;
+            if (c.getName().equals("region"))
+                region = c;
+        }
 
         if (token != null) {
+            PanelBO panelBO = new PanelBO();
+            List clientList = PanelBO.searchPanelsWithRegion(region.getValue());
+            request.setAttribute("panelList", clientList);
             request.getRequestDispatcher("panellist_MINIGRC.jsp").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Vous devez être connecté pour accéder à cette page.");

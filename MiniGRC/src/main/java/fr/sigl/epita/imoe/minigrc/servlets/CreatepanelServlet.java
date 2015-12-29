@@ -1,5 +1,7 @@
 package fr.sigl.epita.imoe.minigrc.servlets;
 
+import fr.sigl.epita.imoe.minigrc.bo.PanelBO;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -42,17 +44,30 @@ public class CreatepanelServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Cookie[] cookies = request.getCookies();
-        Cookie token = null;
-        for (Cookie c : cookies)
-            if (c.getName().equals("user"))
-                token = c;
+        String method = request.getMethod();
 
-        if (token != null) {
-            request.getRequestDispatcher("createPanel_MINIGRC.jsp").forward(request, response);
-        } else {
-            request.setAttribute("errorMessage", "Vous devez être connecté pour accéder à cette page.");
-            request.getRequestDispatcher("login_MINIGRC.jsp").forward(request, response);
+        if (method.equals("GET")) {
+            Cookie[] cookies = request.getCookies();
+            Cookie token = null;
+            for (Cookie c : cookies)
+                if (c.getName().equals("user"))
+                    token = c;
+
+            if (token != null) {
+                request.getRequestDispatcher("createPanel_MINIGRC.jsp").forward(request, response);
+            } else {
+                request.setAttribute("errorMessage", "Vous devez être connecté pour accéder à cette page.");
+                request.getRequestDispatcher("login_MINIGRC.jsp").forward(request, response);
+            }
+        } else if (method.equals("POST")) {
+            PanelBO panelBO = new PanelBO();
+            panelBO.createPanel(request.getParameter("name"),
+                    request.getParameter("min_age"),
+                    request.getParameter("max_age"),
+                    request.getParameter("region"),
+                    request.getParameter("type"));
+
+            request.getRequestDispatcher("panellist_MINIGRC.jsp").forward(request, response);
         }
     }
 }

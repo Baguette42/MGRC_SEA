@@ -51,12 +51,9 @@ public class CreateeventServlet extends HttpServlet {
         if (method.equals("GET")) {
             Cookie[] cookies = request.getCookies();
             Cookie token = null;
-            Cookie clientId = null;
             for (Cookie c : cookies) {
                 if (c.getName().equals("user"))
                     token = c;
-                if (c.getName().equals("clientId"))
-                    clientId = c;
             }
 
             if (token != null) {
