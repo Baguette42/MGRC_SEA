@@ -1,6 +1,7 @@
 package fr.sigl.epita.imoe.minigrc.servlets.utils;
 
 
+import java.util.Calendar;
 import java.util.List;
 
 import fr.sigl.epita.imoe.minigrc.beans.ClientEntity;
@@ -24,16 +25,18 @@ public class MailService {
 		
 		
 		//Client age calculations
-		Date now = new Date();
-		Date clientNaissance = client.getClientNaissance();
-		int clientAge = now.getYear() - clientNaissance.getYear();
-		
-		if (now.getMonth() < clientNaissance.getMonth())
-			clientAge--;
-		else if ((now.getMonth() == clientNaissance.getMonth()) && (now.getDate() < clientNaissance.getDate()))
-			clientAge--;
-		
-		mailTextForClient.replaceAll("<age>", Integer.toString(clientAge));
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(client.getClientNaissance());
+        Calendar today = Calendar.getInstance();
+        int clientAge = today.get(Calendar.YEAR) - calendar.get(Calendar.YEAR);
+        if (today.get(Calendar.MONTH) < calendar.get(Calendar.MONTH)) {
+            clientAge--;
+        } else if (today.get(Calendar.MONTH) == calendar.get(Calendar.MONTH)
+                && today.get(Calendar.DAY_OF_MONTH) < calendar.get(Calendar.DAY_OF_MONTH)) {
+            clientAge--;
+        }
+
+        mailTextForClient.replaceAll("<age>", Integer.toString(clientAge));
 
 		//Returning the new string where tags are replaced by client values
 		return mailTextForClient;
