@@ -1,6 +1,7 @@
 package fr.sigl.epita.imoe.minigrc.servlets;
 
 import fr.sigl.epita.imoe.minigrc.bo.PanelBO;
+import fr.sigl.epita.imoe.minigrc.servlets.utils.MailResult;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -68,9 +69,11 @@ public class CreateemailServlet extends HttpServlet {
             }
 
             PanelBO panelBO = new PanelBO();
-            panelBO.sendEmails(panelId.getValue(), request.getParameter("message"));
+            MailResult mailResult = panelBO.sendEmails(panelId.getValue(), request.getParameter("message"));
 
-            response.sendRedirect("bilan");
+            response.sendRedirect("bilan?invalidEmailCount=" + mailResult.getInvalidEmailCount()
+            						+ "&missingDataCount" + mailResult.getMissingDataCount()
+            						+ "&sentMailsCount" + mailResult.getSentMailsCount());
         }
     }
 }

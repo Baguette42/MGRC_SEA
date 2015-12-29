@@ -3,6 +3,7 @@ package fr.sigl.epita.imoe.minigrc.bo;
 import fr.sigl.epita.imoe.minigrc.beans.ClientEntity;
 import fr.sigl.epita.imoe.minigrc.beans.PanelEntity;
 import fr.sigl.epita.imoe.minigrc.dao.DAOFactory;
+import fr.sigl.epita.imoe.minigrc.servlets.utils.MailResult;
 import fr.sigl.epita.imoe.minigrc.servlets.utils.MailService;
 
 import java.sql.Date;
@@ -36,7 +37,7 @@ public class PanelBO {
         return panelList;
     }
 
-    public void sendEmails(String panelId, String message) {
+    public MailResult sendEmails(String panelId, String message) {
         PanelEntity panelEntity = DAOFactory.getInstance().getPanelDAO().findById(Integer.parseInt(panelId));
 
         ClientEntity clientEntity = new ClientEntity();
@@ -54,7 +55,7 @@ public class PanelBO {
             }
         }
 
-        MailService.sendMessageToClients(message, result);
+        return MailService.sendMessageToClients(message, result);
     }
     
     public int findClientAge(Date naissance) {

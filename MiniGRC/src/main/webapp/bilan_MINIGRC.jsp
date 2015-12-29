@@ -15,15 +15,15 @@
 		<table cellpadding="10">
 			<tr>
 				<td>Nombre de clients sans adresse email valide:</td>
-				<td>${bilan.clientsMailNonValides}</td>
+				<td><%= request.getParameter("invalidEmailCount") %></td>
 			</tr>
 			<tr>
 				<td>Données manquantes pour remplacement:</td>
-				<td>${bilan.donnéesManquantes}</td>
+				<td><%= request.getParameter("invalidEmailCount") %></td>
 			</tr>
 			<tr>
 				<td>Nombres de mails envoyés:</td>
-				<td>${bilan.mailsEnvoyés}</td>
+				<td><%= request.getParameter("invalidEmailCount") %></td>
 			</tr>
 
 			<tr>

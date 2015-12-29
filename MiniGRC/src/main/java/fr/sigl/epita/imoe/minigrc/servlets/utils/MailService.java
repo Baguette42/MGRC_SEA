@@ -11,13 +11,28 @@ import javax.mail.internet.*;
 
 public class MailService {
 
-    public static String replaceMailTagsForClient(String mailText, ClientEntity client) {
+    public static String replaceMailTagsForClient(String mailText, ClientEntity client, MailResult result) {
 
         String mailTextForClient = mailText;
 
-        mailTextForClient = mailTextForClient.replaceAll("<nom>", client.getClientNom());
-        mailTextForClient = mailTextForClient.replaceAll("<prenom>", client.getClientPrenom());
-        mailTextForClient = mailTextForClient.replaceAll("<region>", client.getClientRegion());
+        //Replacing <nom>
+        if (client.getClientNom() != null && !client.getClientNom().equals(""))
+        	mailTextForClient = mailTextForClient.replaceAll("<nom>", client.getClientNom());
+        else
+        	result.setMissingDataCount(result.getMissingDataCount() + 1);
+
+        //Replacing <prenom>
+        if (client.getClientPrenom() != null && !client.getClientPrenom().equals(""))
+        	mailTextForClient = mailTextForClient.replaceAll("<prenom>", client.getClientPrenom());
+        else
+        	result.setMissingDataCount(result.getMissingDataCount() + 1);
+        
+        //Replacing <region>
+        if (client.getClientRegion() != null && !client.getClientRegion().equals(""))
+        	mailTextForClient = mailTextForClient.replaceAll("<region>", client.getClientRegion());
+        else
+        	result.setMissingDataCount(result.getMissingDataCount() + 1);
+
 
         //Client age calculations
         Calendar calendar = Calendar.getInstance();
@@ -37,9 +52,11 @@ public class MailService {
         return mailTextForClient;
     }
 
-    public static int sendMessageToClients(String mailMessage, List<ClientEntity> clients) {
+    public static MailResult sendMessageToClients(String mailMessage, List<ClientEntity> clients) {
 
+    	MailResult result = new MailResult(0, 0, 0);
         int sentEmailsCount = 0;
+        int invalidEmailCount = 0;
 
         //INITIALISATION
         // Sender's email ID needs to be mentioned
@@ -68,7 +85,7 @@ public class MailService {
         //SENDING
         for (ClientEntity client : clients) {
 
-            String messageToSend = replaceMailTagsForClient(mailMessage, client);
+            String messageToSend = replaceMailTagsForClient(mailMessage, client, result);
             String to = client.getClientEmail();
 			
 			try {
@@ -96,12 +113,16 @@ public class MailService {
 		           sentEmailsCount++;
 
 		        } catch (MessagingException e) {
-			       System.out.println("Sent message successfully....");
+		        	invalidEmailCount++;
+		        	System.out.println("Sent not message successfully....");
 		        }
 
         }
 
-        return sentEmailsCount;
+        result.setSentMailsCount(sentEmailsCount);
+        result.setInvalidEmailCount(invalidEmailCount);
+        
+        return result;
     }
 
     /***
