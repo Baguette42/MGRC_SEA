@@ -1,12 +1,11 @@
 package fr.sigl.epita.imoe.minigrc.bo;
 
 import fr.sigl.epita.imoe.minigrc.beans.ClientEntity;
+import fr.sigl.epita.imoe.minigrc.beans.EvenementEntity;
 import fr.sigl.epita.imoe.minigrc.dao.DAOFactory;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Created by Chaf on 12/29/2015.
@@ -52,5 +51,21 @@ public class ClientBO {
         clientEntity = DAOFactory.getInstance().getClientDAO().findById(Integer.parseInt(selectedClientId));
 
         return clientEntity;
+    }
+
+    public List getClientEvenements(ClientEntity clientEntity) {
+        List eventList = new ArrayList<>();
+        EvenementEntity evenementEntity = new EvenementEntity();
+        evenementEntity.setEventClientId(clientEntity.getClientId());
+        eventList = DAOFactory.getInstance().getEvenementDAO().findByExample(evenementEntity);
+        Collections.sort(eventList, new Comparator<EvenementEntity>() {
+            @Override
+            public int compare(EvenementEntity e1, EvenementEntity e2) {
+                return e1.getEventDate().compareTo(e2.getEventDate());
+            }
+        });
+
+        return eventList;
+
     }
 }

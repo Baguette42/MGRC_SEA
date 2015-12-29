@@ -20,7 +20,7 @@
                         <td>${client.clientCivilite}</td>
                         <td>Date de naissance:</td>
                         <td>
-                            <fmt:formatDate pattern="dd/MM/yyyy" value="${client.clientNaissance}"></fmt:formatDate>
+                            <fmt:formatDate pattern="yyyy-MM-dd" value="${client.clientNaissance}"></fmt:formatDate>
                         </td>
                     </tr>
                     <tr>
@@ -71,30 +71,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <a class="eventrow" href="edit?selectedEventId=1">Test</a>
-                            </td>
-                            <td>
-                                <a class="eventrow" href="edit?selectedEventId=1">10/02/2012</a>
-                            </td>
-                            <td>
-                                <a class="eventrow" href="edit?selectedEventId=1">Super Evenement</a>
-                            </td>
-                        </tr>
                         <c:forEach var="event" items="${eventList}">
                             <tr>
                                 <td>
-                                    <a href="edit?selectedEventId=${event.id}">${event.type}</a>
+                                    <a href="edit?selectedEventId=${event.eventId}">${event.eventType}</a>
                                 </td>
                                 <td>
-                                    <a href="edit?selectedEventId=${event.id}">
+                                    <a href="edit?selectedEventId=${event.eventId}">
                                         <fmt:formatDate
-                                                pattern="dd/MM/yyyy" value="${event.date}"></fmt:formatDate>
+                                                pattern="yyyy-MM-dd" value="${event.eventDate}"></fmt:formatDate>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="edit?selectedEventId=${event.id}">${event.description}</a>
+                                    <a href="edit?selectedEventId=${event.eventId}">${event.eventDescription}</a>
                                 </td>
                             </tr>
                         </c:forEach>

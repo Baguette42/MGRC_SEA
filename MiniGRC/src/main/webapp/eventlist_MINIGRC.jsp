@@ -1,23 +1,18 @@
 <%@include file="includes/header.jsp" %>
 <center>
     <table cellpadding="10">
-        <form>
+        <form action="eventlist">
             <tr>
                 <td>Type :</td>
-                <td>
-                    <input name="name_searchform" value="" />
-                </td>
-                <td>Description:</td>
-                <td>
-                    <input name="author_firstname_searchform" value="" />
-                </td>
+                <td><input name="type_searchform" value="" /></td>
+                <td>Date (aaaa-mm-jj):</td>
+                <td><input name="date_searchform" value="" /></td>
                 <td class="searchButtonTd">
-                    <input
-					type="button"
-					class="searchbutton" name="search_button" value="Rechercher" />
+                    <button type="submit" class="searchbutton" name="search_button">Rechercher</button>
                 </td>
             </tr>
         </form>
+        <!--
         <tr>
 			<td>
 				<form action="createevent" method="get">
@@ -25,6 +20,7 @@
 				</form>
 			</td>
 		</tr>
+		-->
         
         <tr>
             <table cellpadding="10">
@@ -46,31 +42,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <a class="eventrow" href="event?selectedEventId=1">Test</a>
-                                    </td>
-                                    <td>
-                                        <a class="eventrow" href="event?selectedEventId=1">10/02/2012</a>
-                                    </td>
-                                    <td>
-                                        <a class="eventrow" href="event?selectedEventId=1">Super
-								evenement</a>
-                                    </td>
-                                </tr>
                                 <c:forEach var="event" items="${eventList}">
                                     <tr>
                                         <td>
-                                            <a href="event?selectedEventId=${event.id}">${event.type}</a>
+                                            <a href="event?selectedEventId=${event.eventId}">${event.eventType}</a>
                                         </td>
                                         <td>
-                                            <a href="event?selectedEventId=${event.id}">
-                                                <fmt:formatDate
-										pattern="dd/MM/yyyy" value="${event.date}"></fmt:formatDate>
+                                            <a href="event?selectedEventId=${event.eventId}">
+                                                <fmt:formatDate pattern="yyyy-MM-dd" value="${event.eventDate}"></fmt:formatDate>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="event?selectedEventId=${event.id}">${event.description}</a>
+                                            <a href="event?selectedEventId=${event.eventId}">${event.eventDescription}</a>
                                         </td>
                                     </tr>
                                 </c:forEach>

@@ -1,9 +1,12 @@
 package fr.sigl.epita.imoe.minigrc.servlets;
 
+import fr.sigl.epita.imoe.minigrc.bo.EvenementBO;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -44,11 +47,22 @@ public class EventlistServlet extends HttpServlet {
 
         Cookie[] cookies = request.getCookies();
         Cookie token = null;
-        for (Cookie c : cookies)
+        Cookie region = null;
+        for (Cookie c : cookies) {
             if (c.getName().equals("user"))
                 token = c;
+            if (c.getName().equals("region"))
+                region = c;
+        }
 
         if (token != null) {
+            EvenementBO evenementBO = new EvenementBO();
+            List eventList = new ArrayList<>();
+            eventList = evenementBO.searchEventsWithRegion(request.getParameter("type_searchform"),
+                    request.getParameter("date_searchform"),
+                    region.getValue());
+            request.setAttribute("eventList", eventList);
+
             request.getRequestDispatcher("eventlist_MINIGRC.jsp").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Vous devez être connecté pour accéder à cette page.");

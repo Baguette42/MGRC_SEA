@@ -4,6 +4,8 @@ import fr.sigl.epita.imoe.minigrc.beans.ClientEntity;
 import fr.sigl.epita.imoe.minigrc.bo.ClientBO;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -55,6 +57,11 @@ public class ClientServlet extends HttpServlet {
             ClientBO clientBO = new ClientBO();
             ClientEntity clientEntity = clientBO.getClient(request.getParameter("selectedClientId"));
             request.setAttribute("client", clientEntity);
+
+            List eventList = new ArrayList<>();
+            eventList = clientBO.getClientEvenements(clientEntity);
+            request.setAttribute("eventList", eventList);
+
             response.addCookie(new Cookie("clientId", request.getParameter("selectedClientId")));
             request.getRequestDispatcher("client_MINIGRC.jsp").forward(request, response);
         } else {

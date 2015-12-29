@@ -81,7 +81,7 @@ public class CreateeventServlet extends HttpServlet {
                     request.getParameter("date"),
                     request.getParameter("description"));
 
-            response.sendRedirect("/client?selectedClientId" + clientId.getValue());
+            response.sendRedirect("/client?selectedClientId=" + clientId.getValue());
         }
 
     }

@@ -16,7 +16,7 @@
                 <td>
                     <input name="type" value="" />
                 </td>
-                <td>Date de l'evenement:</td>
+                <td>Date de l'evenement (aaaa-mm-jj):</td>
                 <td>
                     <input type="date" name="date" value="${date}">
                 </td>

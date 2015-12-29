@@ -4,7 +4,7 @@
         <tr>
             <td>
                 <center style="font-size: 16px; margin: 20px 10px 60px 10px">
-                    <b>Informations évènement</b>
+                    <b>Informations evenement</b>
                 </center>
             </td>
         </tr>
@@ -13,25 +13,25 @@
         <tr>
             <td>Type:</td>
             <td>${event.type}</td>
-            <td>Date de l'évènement:</td>
+            <td>Date de l'evenement:</td>
             <td>
-                <fmt:formatDate pattern="dd/MM/yyyy" value="${client.date}"></fmt:formatDate>
+                <fmt:formatDate pattern="yyyy-MM-dd" value="${client.date}"></fmt:formatDate>
             </td>
         </tr>
         <tr>
-            <td>Utilisateur créateur:</td>
+            <td>Utilisateur createur:</td>
             <td>${event.createur}</td>
         </tr>
         <tr>
-            <td>Date de dernière modification:</td>
+            <td>Date de derniere modification:</td>
             <td>
-                <fmt:formatDate pattern="dd/MM/yyyy" value="${client.date}"></fmt:formatDate>
+                <fmt:formatDate pattern="yyyy-MM-dd" value="${client.date}"></fmt:formatDate>
             </td>
-            <td>Dernière modification par:</td>
+            <td>Derniere modification par:</td>
             <td>${event.modifieur}</td>
         </tr>
         <tr>
-            <td>Description de l'évènement:</td>
+            <td>Description de l'evenement:</td>
             <td>${event.description}</td>
         </tr>
     </table>
