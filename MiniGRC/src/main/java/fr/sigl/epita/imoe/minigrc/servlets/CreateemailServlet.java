@@ -69,6 +69,8 @@ public class CreateemailServlet extends HttpServlet {
 
             PanelBO panelBO = new PanelBO();
             panelBO.sendEmails(panelId.getValue(), request.getParameter("message"));
+
+            response.sendRedirect("bilan");
         }
     }
 }

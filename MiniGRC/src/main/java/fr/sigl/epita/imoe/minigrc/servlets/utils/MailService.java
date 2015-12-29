@@ -1,30 +1,25 @@
 package fr.sigl.epita.imoe.minigrc.servlets.utils;
 
+import fr.sigl.epita.imoe.minigrc.beans.ClientEntity;
 
 import java.util.Calendar;
 import java.util.List;
-
-import fr.sigl.epita.imoe.minigrc.beans.ClientEntity;
-
 import java.util.Properties;
-import java.util.Date;
 
 import javax.mail.*;
-
 import javax.mail.internet.*;
 
 public class MailService {
-	
-	public static String replaceMailTagsForClient(String mailText, ClientEntity client) {
-		
-		String mailTextForClient = mailText;
-		
-		mailTextForClient.replaceAll("<nom>", client.getClientNom());
-		mailTextForClient.replaceAll("<prenom>", client.getClientPrenom());
-		mailTextForClient.replaceAll("<region>", client.getClientRegion());
-		
-		
-		//Client age calculations
+
+    public static String replaceMailTagsForClient(String mailText, ClientEntity client) {
+
+        String mailTextForClient = mailText;
+
+        mailTextForClient = mailTextForClient.replaceAll("<nom>", client.getClientNom());
+        mailTextForClient = mailTextForClient.replaceAll("<prenom>", client.getClientPrenom());
+        mailTextForClient = mailTextForClient.replaceAll("<region>", client.getClientRegion());
+
+        //Client age calculations
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(client.getClientNaissance());
         Calendar today = Calendar.getInstance();
@@ -38,16 +33,16 @@ public class MailService {
 
         mailTextForClient.replaceAll("<age>", Integer.toString(clientAge));
 
-		//Returning the new string where tags are replaced by client values
-		return mailTextForClient;
-	}
-	
-	public static int sendMessageToClients(String mailMessage, List<ClientEntity> clients) {
-		
-		int sentEmailsCount = 0;
-		
-		//INITIALISATION
-		// Sender's email ID needs to be mentioned
+        //Returning the new string where tags are replaced by client values
+        return mailTextForClient;
+    }
+
+    public static int sendMessageToClients(String mailMessage, List<ClientEntity> clients) {
+
+        int sentEmailsCount = 0;
+
+        //INITIALISATION
+        // Sender's email ID needs to be mentioned
         String from = "seattle.minigrc@gmail.com";
         final String username = "seattle.minigrc@gmail.com";
         final String password = "seattle42";
@@ -61,20 +56,20 @@ public class MailService {
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-        
+
         // Get the Session object.
         Session session = Session.getInstance(props,
-        new javax.mail.Authenticator() {
-           protected PasswordAuthentication getPasswordAuthentication() {
-              return new PasswordAuthentication(username, password);
-           }
-        });
-		
-		//SENDING 
-		for (ClientEntity client : clients) {
-			
-			String messageToSend = replaceMailTagsForClient(mailMessage, client);
-			String to = client.getClientEmail();
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        //SENDING
+        for (ClientEntity client : clients) {
+
+            String messageToSend = replaceMailTagsForClient(mailMessage, client);
+            String to = client.getClientEmail();
 			
 			try {
 		           // Create a default MimeMessage object.
@@ -103,17 +98,17 @@ public class MailService {
 		        } catch (MessagingException e) {
 			       System.out.println("Sent message successfully....");
 		        }
-			
-		}
-		
-		return sentEmailsCount;
-	}
-	
-	/***
-	 * Function used to test the gmail smtp
-	 */
-	private static void sendMailTest(){
-		 // Recipient's email ID needs to be mentioned.
+
+        }
+
+        return sentEmailsCount;
+    }
+
+    /***
+     * Function used to test the gmail smtp
+     */
+    private static void sendMailTest(){
+        // Recipient's email ID needs to be mentioned.
         String to = "guillaume.moizan@gmail.com";//change accordingly
 
         // Sender's email ID needs to be mentioned
@@ -129,41 +124,41 @@ public class MailService {
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-        
+
         // Get the Session object.
         Session session = Session.getInstance(props,
-        new javax.mail.Authenticator() {
-           protected PasswordAuthentication getPasswordAuthentication() {
-              return new PasswordAuthentication(username, password);
-           }
-        });
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
 
         try {
-           // Create a default MimeMessage object.
-           Message message = new MimeMessage(session);
+            // Create a default MimeMessage object.
+            Message message = new MimeMessage(session);
 
-           // Set From: header field of the header.
-           message.setFrom(new InternetAddress(from));
+            // Set From: header field of the header.
+            message.setFrom(new InternetAddress(from));
 
-           // Set To: header field of the header.
-           message.setRecipients(Message.RecipientType.TO,
-           InternetAddress.parse(to));
+            // Set To: header field of the header.
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(to));
 
-           // Set Subject: header field
-           message.setSubject("Testing Subject");
+            // Set Subject: header field
+            message.setSubject("Testing Subject");
 
-           // Now set the actual message
-           message.setText("Hello, this is sample for to check send "
-              + "email using JavaMailAPI ");
+            // Now set the actual message
+            message.setText("Hello, this is sample for to check send "
+                    + "email using JavaMailAPI ");
 
-           // Send message
-           Transport.send(message);
+            // Send message
+            Transport.send(message);
 
-           System.out.println("Sent message successfully....");
+            System.out.println("Sent message successfully....");
 
         } catch (MessagingException e) {
-              throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
-	}
+    }
 
 }
