@@ -72,8 +72,8 @@ public class CreateemailServlet extends HttpServlet {
             MailResult mailResult = panelBO.sendEmails(panelId.getValue(), request.getParameter("message"));
 
             response.sendRedirect("bilan?invalidEmailCount=" + mailResult.getInvalidEmailCount()
-            						+ "&missingDataCount" + mailResult.getMissingDataCount()
-            						+ "&sentMailsCount" + mailResult.getSentMailsCount());
+            						+ "&missingDataCount=" + mailResult.getMissingDataCount()
+            						+ "&sentMailsCount=" + mailResult.getSentMailsCount());
         }
     }
 }
