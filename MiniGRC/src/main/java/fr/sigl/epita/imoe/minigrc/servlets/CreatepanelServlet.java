@@ -67,7 +67,7 @@ public class CreatepanelServlet extends HttpServlet {
                     request.getParameter("region"),
                     request.getParameter("type"));
 
-            request.getRequestDispatcher("panellist_MINIGRC.jsp").forward(request, response);
+            response.sendRedirect("/panellist");
         }
     }
 }

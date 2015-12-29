@@ -1,7 +1,7 @@
 <%@include file="includes/headerLogin.jsp" %>
 <center>
     <table>
-        <form action="mainpage" method="post">
+        <form action="login" method="post">
             <tr>
                 <center style="font:arial; font-size:20px;margin:30px">
                     <b>MiniGRC</b>

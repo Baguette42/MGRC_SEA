@@ -54,8 +54,7 @@ public class PanelBO {
             }
         }
 
-        MailService mailService = new MailService();
-        mailService.sendMessageToClients(message, result);
+        MailService.sendMessageToClients(message, result);
     }
     
     public int findClientAge(Date naissance) {

@@ -74,16 +74,16 @@
                         <c:forEach var="event" items="${eventList}">
                             <tr>
                                 <td>
-                                    <a href="edit?selectedEventId=${event.eventId}">${event.eventType}</a>
+                                    <a href="event?selectedEventId=${event.eventId}">${event.eventType}</a>
                                 </td>
                                 <td>
-                                    <a href="edit?selectedEventId=${event.eventId}">
+                                    <a href="event?selectedEventId=${event.eventId}">
                                         <fmt:formatDate
                                                 pattern="yyyy-MM-dd" value="${event.eventDate}"></fmt:formatDate>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="edit?selectedEventId=${event.eventId}">${event.eventDescription}</a>
+                                    <a href="event?selectedEventId=${event.eventId}">${event.eventDescription}</a>
                                 </td>
                             </tr>
                         </c:forEach>

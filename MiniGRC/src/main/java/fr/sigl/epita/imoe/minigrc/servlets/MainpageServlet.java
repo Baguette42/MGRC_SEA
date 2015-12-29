@@ -5,7 +5,6 @@ import fr.sigl.epita.imoe.minigrc.bo.UserloginBO;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -44,16 +43,17 @@ public class MainpageServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        UserloginBO userloginBO = new UserloginBO();
-        String login = request.getParameter("login_form");
-        String password = request.getParameter("password_form");
-        String region = userloginBO.checkLogin(login, password);
-        if (region != null) {
-            response.addCookie(new Cookie("user", login));
-            response.addCookie(new Cookie("region", region));
+        Cookie[] cookies = request.getCookies();
+        Cookie token = null;
+        for (Cookie c : cookies) {
+            if (c.getName().equals("user"))
+                token = c;
+        }
+
+        if (null != token) {
             request.getRequestDispatcher("mainpage_MINIGRC.jsp").forward(request, response);
         } else {
-            request.setAttribute("errorMessage", "Nom d'utilisateur ou mot de passe incorrect.");
+            request.setAttribute("errorMessage", "Vous devez être connecté pour accéder à cette page.");
             request.getRequestDispatcher("login_MINIGRC.jsp").forward(request, response);
         }
     }

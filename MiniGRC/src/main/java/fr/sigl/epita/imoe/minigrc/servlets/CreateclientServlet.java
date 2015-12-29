@@ -73,7 +73,7 @@ public class CreateclientServlet extends HttpServlet {
                     request.getParameter("client_region"),
                     request.getParameter("client_emailing"));
 
-            request.getRequestDispatcher("clientlist_MINIGRC.jsp").forward(request, response);
+            response.sendRedirect("/clientlist");
         }
     }
 }

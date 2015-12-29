@@ -16,6 +16,10 @@ public class UserloginBO {
         UserloginEntity userlogin = new UserloginEntity();
         userlogin.setUserLogin(login);
         userlogin.setUserPassword(password);
+
+        if (null == login && null == password)
+            return null;
+
         List userloginList = DAOFactory.getInstance().getUserloginDAO().findByExample(userlogin);
 
         String region = null;
