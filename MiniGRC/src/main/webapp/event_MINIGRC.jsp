@@ -12,27 +12,27 @@
     <table cellpadding="10">
         <tr>
             <td>Type:</td>
-            <td>${event.type}</td>
+            <td>${event.eventType}</td>
             <td>Date de l'evenement:</td>
             <td>
-                <fmt:formatDate pattern="yyyy-MM-dd" value="${client.date}"></fmt:formatDate>
+                <fmt:formatDate pattern="yyyy-MM-dd" value="${event.eventDate}"></fmt:formatDate>
             </td>
         </tr>
         <tr>
             <td>Utilisateur createur:</td>
-            <td>${event.createur}</td>
+            <td>${event.eventCreateur}</td>
         </tr>
         <tr>
             <td>Date de derniere modification:</td>
             <td>
-                <fmt:formatDate pattern="yyyy-MM-dd" value="${client.date}"></fmt:formatDate>
+                <fmt:formatDate pattern="yyyy-MM-dd" value="${event.eventLastupdate}"></fmt:formatDate>
             </td>
             <td>Derniere modification par:</td>
-            <td>${event.modifieur}</td>
+            <td>${event.eventLastupdater}</td>
         </tr>
         <tr>
             <td>Description de l'evenement:</td>
-            <td>${event.description}</td>
+            <td>${event.eventDescription}</td>
         </tr>
     </table>
 </center><%@include file="includes/footer.jsp"%>

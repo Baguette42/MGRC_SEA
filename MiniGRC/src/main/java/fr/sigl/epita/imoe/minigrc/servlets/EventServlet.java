@@ -1,5 +1,8 @@
 package fr.sigl.epita.imoe.minigrc.servlets;
 
+import fr.sigl.epita.imoe.minigrc.beans.EvenementEntity;
+import fr.sigl.epita.imoe.minigrc.bo.EvenementBO;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -49,6 +52,11 @@ public class EventServlet extends HttpServlet {
                 token = c;
 
         if (token != null) {
+
+            EvenementBO evenementBO = new EvenementBO();
+            EvenementEntity evenementEntity = evenementBO.getEvenement(request.getParameter("selectedEventId"));
+            request.setAttribute("event", evenementEntity);
+
             request.getRequestDispatcher("event_MINIGRC.jsp").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Vous devez être connecté pour accéder à cette page.");

@@ -54,4 +54,10 @@ public class EvenementBO {
 
         return evenementList;
     }
+
+    public EvenementEntity getEvenement(String selectedEventId) {
+        EvenementEntity evenementEntity = DAOFactory.getInstance().getEvenementDAO().findById(Integer.parseInt(selectedEventId));
+
+        return evenementEntity;
+    }
 }
