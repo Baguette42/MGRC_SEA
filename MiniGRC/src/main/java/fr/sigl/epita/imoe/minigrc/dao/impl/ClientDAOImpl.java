@@ -43,8 +43,12 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
     @Override
 	public void attachDirty(ClientEntity instance) {
 		LOGGER.log(Level.INFO, "attaching dirty Client instance");
+        Transaction transaction = null;
 		try {
-			sessionFactory.openSession().saveOrUpdate(instance);
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(instance);
+            transaction.commit();
 			LOGGER.log(Level.INFO, "attach successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -55,8 +59,12 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
     @Override
 	public void attachClean(ClientEntity instance) {
 		LOGGER.log(Level.INFO, "attaching clean Client instance");
-		try {
-			sessionFactory.openSession().lock(instance, LockMode.NONE);
+        Transaction transaction = null;
+        try {
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.lock(instance, LockMode.NONE);
+            transaction.commit();
 			LOGGER.log(Level.INFO, "attach successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -67,8 +75,12 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
     @Override
 	public void delete(ClientEntity persistentInstance) {
 		LOGGER.log(Level.INFO, "deleting Client instance");
-		try {
-			sessionFactory.openSession().delete(persistentInstance);
+        Transaction transaction = null;
+        try {
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.delete(persistentInstance);
+            transaction.commit();
 			LOGGER.log(Level.INFO, "delete successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "delete failed", re);
@@ -79,8 +91,12 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
     @Override
 	public ClientEntity merge(ClientEntity detachedInstance) {
 		LOGGER.log(Level.SEVERE, "merging Client instance");
-		try {
-			ClientEntity result = (ClientEntity) sessionFactory.openSession().merge(detachedInstance);
+        Transaction transaction = null;
+        try {
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            ClientEntity result = (ClientEntity) session.merge(detachedInstance);
+            transaction.commit();
 			LOGGER.log(Level.INFO, "merge successful");
 			return result;
 		} catch (RuntimeException re) {

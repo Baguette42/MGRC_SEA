@@ -42,8 +42,12 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
 
     public void attachDirty(UserloginEntity instance) {
         LOGGER.log(Level.INFO, "attaching dirty UserloginEntity instance");
+        Transaction transaction = null;
         try {
-            sessionFactory.openSession().saveOrUpdate(instance);
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(instance);
+            transaction.commit();
             LOGGER.log(Level.INFO, "attach successful");
         } catch (RuntimeException re) {
             LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -53,8 +57,12 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
 
     public void attachClean(UserloginEntity instance) {
         LOGGER.log(Level.INFO, "attaching clean UserloginEntity instance");
+        Transaction transaction = null;
         try {
-            sessionFactory.openSession().lock(instance, LockMode.NONE);
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.lock(instance, LockMode.NONE);
+            transaction.commit();
             LOGGER.log(Level.INFO, "attach successful");
         } catch (RuntimeException re) {
             LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -64,8 +72,12 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
 
     public void delete(UserloginEntity persistentInstance) {
         LOGGER.log(Level.INFO, "deleting UserloginEntity instance");
+        Transaction transaction = null;
         try {
-            sessionFactory.openSession().delete(persistentInstance);
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.delete(persistentInstance);
+            transaction.commit();
             LOGGER.log(Level.INFO, "delete successful");
         } catch (RuntimeException re) {
             LOGGER.log(Level.SEVERE, "delete failed", re);
@@ -75,8 +87,12 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
 
     public UserloginEntity merge(UserloginEntity detachedInstance) {
         LOGGER.log(Level.INFO, "merging UserloginEntity instance");
+        Transaction transaction = null;
         try {
-            UserloginEntity result = (UserloginEntity) sessionFactory.openSession().merge(detachedInstance);
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            UserloginEntity result = (UserloginEntity) session.merge(detachedInstance);
+            transaction.commit();
             LOGGER.log(Level.INFO, "merge successful");
             return result;
         } catch (RuntimeException re) {

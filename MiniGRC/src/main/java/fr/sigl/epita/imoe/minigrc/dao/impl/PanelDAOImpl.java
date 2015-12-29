@@ -43,8 +43,12 @@ public class PanelDAOImpl extends DAO implements PanelDAO {
 
 	public void attachDirty(PanelEntity instance) {
 		LOGGER.log(Level.INFO, "attaching dirty PanelEntity instance");
-		try {
-			sessionFactory.openSession().saveOrUpdate(instance);
+        Transaction transaction = null;
+        try {
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(instance);
+            transaction.commit();
 			LOGGER.log(Level.INFO, "attach successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -54,8 +58,12 @@ public class PanelDAOImpl extends DAO implements PanelDAO {
 
 	public void attachClean(PanelEntity instance) {
 		LOGGER.log(Level.INFO, "attaching clean PanelEntity instance");
-		try {
-			sessionFactory.openSession().lock(instance, LockMode.NONE);
+        Transaction transaction = null;
+        try {
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.lock(instance, LockMode.NONE);
+            transaction.commit();
 			LOGGER.log(Level.INFO, "attach successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -65,8 +73,12 @@ public class PanelDAOImpl extends DAO implements PanelDAO {
 
 	public void delete(PanelEntity persistentInstance) {
 		LOGGER.log(Level.INFO, "deleting PanelEntity instance");
-		try {
-			sessionFactory.openSession().delete(persistentInstance);
+        Transaction transaction = null;
+        try {
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.delete(persistentInstance);
+            transaction.commit();
 			LOGGER.log(Level.INFO, "delete successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "delete failed", re);
@@ -76,8 +88,12 @@ public class PanelDAOImpl extends DAO implements PanelDAO {
 
 	public PanelEntity merge(PanelEntity detachedInstance) {
 		LOGGER.log(Level.INFO, "merging PanelEntity instance");
-		try {
-			PanelEntity result = (PanelEntity) sessionFactory.openSession().merge(detachedInstance);
+        Transaction transaction = null;
+        try {
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            PanelEntity result = (PanelEntity) session.merge(detachedInstance);
+            transaction.commit();
 			LOGGER.log(Level.INFO, "merge successful");
 			return result;
 		} catch (RuntimeException re) {
