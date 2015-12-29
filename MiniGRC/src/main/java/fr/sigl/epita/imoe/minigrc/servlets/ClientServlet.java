@@ -55,6 +55,7 @@ public class ClientServlet extends HttpServlet {
             ClientBO clientBO = new ClientBO();
             ClientEntity clientEntity = clientBO.getClient(request.getParameter("selectedClientId"));
             request.setAttribute("client", clientEntity);
+            response.addCookie(new Cookie("clientId", request.getParameter("selectedClientId")));
             request.getRequestDispatcher("client_MINIGRC.jsp").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Vous devez être connecté pour accéder à cette page.");

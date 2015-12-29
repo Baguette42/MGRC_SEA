@@ -21,7 +21,7 @@
         <tr>
 			<td>
 				<form action="createevent" method="get">
-					<button type="submit" id="createEventButton">Ajouter un évènement</button>
+					<button type="submit" id="createEventButton">Ajouter un evenement</button>
 				</form>
 			</td>
 		</tr>
@@ -31,7 +31,7 @@
                 <tr>
                     <td>
                         <center style="font-size: 16px">
-                            <b>Evènements</b>
+                            <b>Evenements</b>
                         </center>
                     </td>
                 </tr>
@@ -55,7 +55,7 @@
                                     </td>
                                     <td>
                                         <a class="eventrow" href="event?selectedEventId=1">Super
-								évènement</a>
+								evenement</a>
                                     </td>
                                 </tr>
                                 <c:forEach var="event" items="${eventList}">

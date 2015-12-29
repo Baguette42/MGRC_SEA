@@ -11,6 +11,7 @@ import java.sql.Date;
 @Table(name = "evenement", schema = "public", catalog = "minigrc")
 public class EvenementEntity implements Serializable {
     private int eventId;
+    private int eventClientId;
     private String eventType;
     private Date eventDate;
     private String eventCreateur;
@@ -28,6 +29,16 @@ public class EvenementEntity implements Serializable {
 
     public void setEventId(int eventId) {
         this.eventId = eventId;
+    }
+
+    @Basic
+    @Column(name = "client_id")
+    public int getEventClientId() {
+        return eventClientId;
+    }
+
+    public void setEventClientId(int eventClientId) {
+        this.eventClientId = eventClientId;
     }
 
     @Basic
@@ -98,6 +109,7 @@ public class EvenementEntity implements Serializable {
         EvenementEntity that = (EvenementEntity) o;
 
         if (eventId != that.eventId) return false;
+        if (eventClientId != that.eventClientId) return false;
         if (eventType != null ? !eventType.equals(that.eventType) : that.eventType != null) return false;
         if (eventDate != null ? !eventDate.equals(that.eventDate) : that.eventDate != null) return false;
         if (eventCreateur != null ? !eventCreateur.equals(that.eventCreateur) : that.eventCreateur != null)

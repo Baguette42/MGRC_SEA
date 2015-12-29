@@ -2,7 +2,7 @@
 <center>
     <table cellpadding="10">
         <center>
-            <form action="createevent" method="post">
+            <form action="createevent" method="get">
                 <input type="hidden" id="isOwner" value="${isOwner}"/>
                 <input type="hidden" id="isAdmin" value="${isAdmin}"/>
                 <table>
@@ -64,47 +64,47 @@
                     </tr>
                     <table border="1" cellpadding="10" width="60%">
                         <thead bgcolor="B8D2FF">
-                            <tr>
-                                <th>Type</th>
-                                <th>Date</th>
-                                <th>Description</th>
-                            </tr>
+                        <tr>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Description</th>
+                        </tr>
                         </thead>
                         <tbody>
+                        <tr>
+                            <td>
+                                <a class="eventrow" href="edit?selectedEventId=1">Test</a>
+                            </td>
+                            <td>
+                                <a class="eventrow" href="edit?selectedEventId=1">10/02/2012</a>
+                            </td>
+                            <td>
+                                <a class="eventrow" href="edit?selectedEventId=1">Super Evenement</a>
+                            </td>
+                        </tr>
+                        <c:forEach var="event" items="${eventList}">
                             <tr>
                                 <td>
-                                    <a class="eventrow" href="edit?selectedEventId=1">Test</a>
+                                    <a href="edit?selectedEventId=${event.id}">${event.type}</a>
                                 </td>
                                 <td>
-                                    <a class="eventrow" href="edit?selectedEventId=1">10/02/2012</a>
+                                    <a href="edit?selectedEventId=${event.id}">
+                                        <fmt:formatDate
+                                                pattern="dd/MM/yyyy" value="${event.date}"></fmt:formatDate>
+                                    </a>
                                 </td>
                                 <td>
-                                    <a class="eventrow" href="edit?selectedEventId=1">Super Evenement</a>
+                                    <a href="edit?selectedEventId=${event.id}">${event.description}</a>
                                 </td>
                             </tr>
-                            <c:forEach var="event" items="${eventList}">
-                                <tr>
-                                    <td>
-                                        <a href="edit?selectedEventId=${event.id}">${event.type}</a>
-                                    </td>
-                                    <td>
-                                        <a href="edit?selectedEventId=${event.id}">
-                                            <fmt:formatDate
-										pattern="dd/MM/yyyy" value="${event.date}"></fmt:formatDate>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="edit?selectedEventId=${event.id}">${event.description}</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </table>
                 <table>
                     <tr>
                         <td>
-                                <input style="margin: 30px" type="submit" value="Ajouter un evenement"/>
+                            <input style="margin: 30px" type="submit" value="Ajouter un evenement"/>
                         </td>
                     </tr>
                 </table>
