@@ -1,8 +1,11 @@
 package fr.sigl.epita.imoe.minigrc.servlets;
 
+import fr.sigl.epita.imoe.minigrc.bo.ClientBO;
+import fr.sigl.epita.imoe.minigrc.bo.EvenementBO;
 import fr.sigl.epita.imoe.minigrc.bo.UserloginBO;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -51,6 +54,14 @@ public class MainpageServlet extends HttpServlet {
         }
 
         if (null != token) {
+            ClientBO clientBO = new ClientBO();
+            List clientList = clientBO.getNewClients(token.getValue());
+            request.setAttribute("clientList", clientList);
+
+            EvenementBO evenementBO = new EvenementBO();
+            List eventList = evenementBO.getLastTenEvents(token.getValue());
+            request.setAttribute("eventList", eventList);
+
             request.getRequestDispatcher("mainpage_MINIGRC.jsp").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Vous devez être connecté pour accéder à cette page.");

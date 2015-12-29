@@ -2,6 +2,7 @@ package fr.sigl.epita.imoe.minigrc.bo;
 
 import fr.sigl.epita.imoe.minigrc.beans.ClientEntity;
 import fr.sigl.epita.imoe.minigrc.beans.EvenementEntity;
+import fr.sigl.epita.imoe.minigrc.beans.UserloginEntity;
 import fr.sigl.epita.imoe.minigrc.dao.DAOFactory;
 
 import java.sql.Date;
@@ -27,6 +28,7 @@ public class ClientBO {
         clientEntity.setClientProfil(client_type);
         clientEntity.setClientRegion(client_region);
         clientEntity.setClientEmailrefus(Boolean.valueOf(client_emailing));
+        clientEntity.setClientDatecreation(new Date(Calendar.getInstance().getTime().getTime()));
 
         DAOFactory.getInstance().getClientDAO().persist(clientEntity);
     }
@@ -67,5 +69,27 @@ public class ClientBO {
 
         return eventList;
 
+    }
+
+    public List getNewClients(String userName) {
+        UserloginEntity userloginEntity = new UserloginEntity();
+        userloginEntity.setUserLogin(userName);
+        List userList = DAOFactory.getInstance().getUserloginDAO().findByExample(userloginEntity);
+
+        userloginEntity = (UserloginEntity) userList.get(0);
+
+        ClientEntity clientEntity = new ClientEntity();
+        clientEntity.setClientRegion(userloginEntity.getUserRegion());
+        List clientList = DAOFactory.getInstance().getClientDAO().findByExample(clientEntity);
+
+        List result = new ArrayList<>();
+        for (int i = 0; i < clientList.size(); ++i) {
+            ClientEntity clientInList = (ClientEntity) clientList.get(i);
+            if (clientInList.getClientDatecreation().compareTo(userloginEntity.getUserLastconnexion()) > 0) {
+                result.add(clientInList);
+            }
+        }
+
+        return result;
     }
 }

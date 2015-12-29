@@ -39,6 +39,7 @@ create table CLIENT (
    CLIENT_PROFIL        VARCHAR(1024)        not null,
    CLIENT_REGION        VARCHAR(1024)        not null,
    CLIENT_EMAILREFUS    BOOL                 not null,
+   CLIENT_DATECREATION  DATE                 not null,
    constraint PK_CLIENT primary key (CLIENT_ID)
 );
 

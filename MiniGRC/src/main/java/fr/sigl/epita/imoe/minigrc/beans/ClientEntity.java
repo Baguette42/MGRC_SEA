@@ -24,6 +24,7 @@ public class ClientEntity implements Serializable {
     private String clientProfil;
     private String clientRegion;
     private boolean clientEmailrefus;
+    private Date clientDatecreation;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="client_client_id_seq")
@@ -167,6 +168,16 @@ public class ClientEntity implements Serializable {
         this.clientEmailrefus = clientEmailrefus;
     }
 
+    @Basic
+    @Column(name = "client_datecreation")
+    public Date getClientDatecreation() {
+        return clientDatecreation;
+    }
+
+    public void setClientDatecreation(Date clientDatecreation) {
+        this.clientDatecreation = clientDatecreation;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -195,6 +206,8 @@ public class ClientEntity implements Serializable {
             return false;
         if (clientProfil != null ? !clientProfil.equals(that.clientProfil) : that.clientProfil != null) return false;
         if (clientRegion != null ? !clientRegion.equals(that.clientRegion) : that.clientRegion != null) return false;
+        if (clientDatecreation != null ? !clientDatecreation.equals(that.clientDatecreation) : that.clientDatecreation != null)
+            return false;
 
         return true;
     }
@@ -215,6 +228,7 @@ public class ClientEntity implements Serializable {
         result = 31 * result + (clientProfil != null ? clientProfil.hashCode() : 0);
         result = 31 * result + (clientRegion != null ? clientRegion.hashCode() : 0);
         result = 31 * result + (clientEmailrefus ? 1 : 0);
+        result = 31 * result + (clientDatecreation != null ? clientDatecreation.hashCode() : 0);
         return result;
     }
 }
