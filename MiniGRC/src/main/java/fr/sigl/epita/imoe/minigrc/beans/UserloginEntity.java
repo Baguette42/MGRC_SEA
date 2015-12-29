@@ -14,6 +14,7 @@ public class UserloginEntity implements Serializable {
     private String userLogin;
     private String userPassword;
     private Date userLastconnexion;
+    private String userRegion;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="userlogin_user_id_seq")
@@ -57,6 +58,16 @@ public class UserloginEntity implements Serializable {
         this.userLastconnexion = userLastconnexion;
     }
 
+    @Basic
+    @Column(name = "user_region")
+    public String getUserRegion() {
+        return userRegion;
+    }
+
+    public void setUserRegion(String userRegion) {
+        this.userRegion = userRegion;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,6 +80,7 @@ public class UserloginEntity implements Serializable {
         if (userPassword != null ? !userPassword.equals(that.userPassword) : that.userPassword != null) return false;
         if (userLastconnexion != null ? !userLastconnexion.equals(that.userLastconnexion) : that.userLastconnexion != null)
             return false;
+        if (userRegion != null ? !userRegion.equals((that.userRegion)) : that.userRegion != null) return false;
 
         return true;
     }
@@ -79,6 +91,7 @@ public class UserloginEntity implements Serializable {
         result = 31 * result + (userLogin != null ? userLogin.hashCode() : 0);
         result = 31 * result + (userPassword != null ? userPassword.hashCode() : 0);
         result = 31 * result + (userLastconnexion != null ? userLastconnexion.hashCode() : 0);
+        result = 32 * result + (userRegion != null ? userRegion.hashCode() : 0);
         return result;
     }
 }

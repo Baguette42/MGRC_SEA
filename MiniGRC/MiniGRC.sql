@@ -106,6 +106,7 @@ create table USERLOGIN (
    USER_LOGIN           VARCHAR(1024)        not null,
    USER_PASSWORD        VARCHAR(1024)        not null,
    USER_LASTCONNEXION   DATE                 null,
+   USER_REGION			VARCHAR(1024)		 not null,
    constraint PK_USERLOGIN primary key (USER_ID)
 );
 

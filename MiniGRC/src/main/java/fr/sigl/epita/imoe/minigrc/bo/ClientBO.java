@@ -32,7 +32,7 @@ public class ClientBO {
         DAOFactory.getInstance().getClientDAO().persist(clientEntity);
     }
 
-    public List searchClients(String lastname_searchform, String firstname_searchform) {
+    public List searchClientsWithRegion(String lastname_searchform, String firstname_searchform, String region) {
 
         List clientList = new ArrayList<>();
 
@@ -41,6 +41,7 @@ public class ClientBO {
             clientEntity.setClientNom(lastname_searchform);
         if (!Objects.equals(firstname_searchform, ""))
             clientEntity.setClientPrenom(firstname_searchform);
+        clientEntity.setClientRegion(region);
         clientList = DAOFactory.getInstance().getClientDAO().findByExample(clientEntity);
 
         return clientList;

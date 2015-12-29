@@ -46,14 +46,18 @@ public class ClientlistServlet extends HttpServlet {
 
         Cookie[] cookies = request.getCookies();
         Cookie token = null;
-        for (Cookie c : cookies)
+        Cookie region = null;
+        for (Cookie c : cookies) {
             if (c.getName().equals("user"))
                 token = c;
+            if (c.getName().equals("region"))
+                region = c;
+        }
 
-        if (token != null) {
+            if (token != null) {
             ClientBO clientBO = new ClientBO();
-            List clientList = clientBO.searchClients(request.getParameter("lastname_searchform"),
-                    request.getParameter("firstname_searchform"));
+            List clientList = clientBO.searchClientsWithRegion(request.getParameter("lastname_searchform"),
+                    request.getParameter("firstname_searchform"), region.getValue());
             request.setAttribute("clientList", clientList);
             request.getRequestDispatcher("clientlist_MINIGRC.jsp").forward(request, response);
         } else {

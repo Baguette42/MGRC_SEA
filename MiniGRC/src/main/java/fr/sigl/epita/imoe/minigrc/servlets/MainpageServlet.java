@@ -47,8 +47,10 @@ public class MainpageServlet extends HttpServlet {
         UserloginBO userloginBO = new UserloginBO();
         String login = request.getParameter("login_form");
         String password = request.getParameter("password_form");
-        if (userloginBO.checkLogin(login, password)) {
+        String region = userloginBO.checkLogin(login, password);
+        if (region != null) {
             response.addCookie(new Cookie("user", login));
+            response.addCookie(new Cookie("region", region));
             request.getRequestDispatcher("mainpage_MINIGRC.jsp").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Nom d'utilisateur ou mot de passe incorrect.");

@@ -46,9 +46,10 @@ public class ClientServlet extends HttpServlet {
 
         Cookie[] cookies = request.getCookies();
         Cookie token = null;
-        for (Cookie c : cookies)
+        for (Cookie c : cookies) {
             if (c.getName().equals("user"))
                 token = c;
+        }
 
         if (token != null) {
             ClientBO clientBO = new ClientBO();
