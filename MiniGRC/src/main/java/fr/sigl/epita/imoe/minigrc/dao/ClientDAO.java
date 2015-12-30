@@ -16,6 +16,8 @@ public interface ClientDAO {
     void attachClean(ClientEntity instance);
 
     void delete(ClientEntity persistentInstance);
+    
+    void update(ClientEntity persistentInstance);
 
     ClientEntity merge(ClientEntity detachedInstance);
 

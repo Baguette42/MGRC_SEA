@@ -87,6 +87,21 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 			throw re;
 		}
 	}
+    
+	public void update(ClientEntity persistentInstance) {
+		LOGGER.log(Level.INFO, "updating Client instance");
+        Transaction transaction = null;
+        try {
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(persistentInstance);
+            transaction.commit();
+			LOGGER.log(Level.INFO, "updating successful");
+		} catch (RuntimeException re) {
+			LOGGER.log(Level.SEVERE, "updating failed", re);
+			throw re;
+		}
+	}
 
     @Override
 	public ClientEntity merge(ClientEntity detachedInstance) {

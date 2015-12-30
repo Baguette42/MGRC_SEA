@@ -32,6 +32,12 @@ public class ClientBO {
 
         DAOFactory.getInstance().getClientDAO().persist(clientEntity);
     }
+    
+    public void updateClient(ClientEntity clientEntity) {
+    	
+
+        DAOFactory.getInstance().getClientDAO().update(clientEntity);
+    }
 
     public List searchClientsWithRegion(String lastname_searchform, String firstname_searchform, String region) {
 
@@ -71,17 +77,21 @@ public class ClientBO {
 
     }
 
-    public List getNewClients(String region, String lastConnexion) {
+    public List getNewClients(String userName) {
+        UserloginEntity userloginEntity = new UserloginEntity();
+        userloginEntity.setUserLogin(userName);
+        List userList = DAOFactory.getInstance().getUserloginDAO().findByExample(userloginEntity);
+
+        userloginEntity = (UserloginEntity) userList.get(0);
+
         ClientEntity clientEntity = new ClientEntity();
-        clientEntity.setClientRegion(region);
+        clientEntity.setClientRegion(userloginEntity.getUserRegion());
         List clientList = DAOFactory.getInstance().getClientDAO().findByExample(clientEntity);
 
-        Date lastConnexionDate = Date.valueOf(lastConnexion);
-
-        List<ClientEntity> result = new ArrayList<>();
+        List result = new ArrayList<>();
         for (int i = 0; i < clientList.size(); ++i) {
             ClientEntity clientInList = (ClientEntity) clientList.get(i);
-            if (clientInList.getClientDatecreation().compareTo(lastConnexionDate) > 0) {
+            if (clientInList.getClientDatecreation().compareTo(userloginEntity.getUserLastconnexion()) > 0) {
                 result.add(clientInList);
             }
         }

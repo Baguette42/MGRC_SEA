@@ -2,7 +2,7 @@
 <center>
     <table cellpadding="10">
         <center>
-            <form action="createevent" method="get">
+            
                 <input type="hidden" id="isOwner" value="${isOwner}"/>
                 <input type="hidden" id="isAdmin" value="${isAdmin}"/>
                 <table>
@@ -14,30 +14,34 @@
                         </td>
                     </tr>
                 </table>
+				<form action="client?selectedClientId=${client.clientId}" id="edit" method="post" name="edit">
                 <table cellpadding="10">
                     <tr>
                         <td>Civilite:</td>
-                        <td>${client.clientCivilite}</td>
+                        <td><input name="client_civilite" value="${client.clientCivilite}"/></td>
                         <td>Date de naissance:</td>
                         <td>
-                            <fmt:formatDate pattern="yyyy-MM-dd" value="${client.clientNaissance}"></fmt:formatDate>
+                            <td>Date de naissance (aaaa-mm-jj):</td>
+                        <td>
+                            <input type="date" name="client_date" value="${client.clientNaissance}">
+                        </td>
                         </td>
                     </tr>
                     <tr>
                         <td>Nom:</td>
-                        <td>${client.clientNom}</td>
+                        <td><input name="client_nom" value="${client.clientNom}"/></td>
                         <td>Prenom:</td>
-                        <td>${client.clientPrenom}</td>
+                        <td><input name="client_prenom" value="${client.clientPrenom}"/></td>
                     </tr>
                     <tr>
                         <td>Adresse:</td>
-                        <td colspan=3>${client.clientAdresse}</td>
+                        <td colspan=3><input name="client_adresse" value="${client.clientAdresse}"/></td>
                     </tr>
                     <tr>
                         <td>Telephone:</td>
-                        <td>${client.clientTelephone}</td>
+                        <td><input name="client_telephone" value="${client.clientTelephone}"/></td>
                         <td>E-mail:</td>
-                        <td>${client.clientEmail}</td>
+                        <td><input name="client_email" value="${client.clientEmail}"/></td>
                     </tr>
                     <tr>
                         <td>
@@ -52,9 +56,19 @@
                     </tr>
                     <tr>
                         <td>Prospect/Client:</td>
-                        <td>${client.clientProfil}</td>
+                        <td>                        <td>
+                            <select name="client_type">
+                                <option value="prospect">Prospect</option>
+                                <option value="client">Client</option>
+                            </select></td>
                         <td>Region geographique:</td>
-                        <td>${client.clientRegion}</td>
+                        <td>                         <select name="client_region">
+                                <option value="grand sud">Grand Sud</option>
+                                <option value="grand ouest">Grand Ouest</option>
+                                <option value="grand est">Grand Est</option>
+                                <option value="grand nord">Grand Nord</option>
+                            </select>
+</td>
                     </tr>
                     <tr>
                         <td>Refus e-mailing?:</td>
@@ -62,6 +76,9 @@
                             <input type="checkbox" id="emailRefus" name="isVerified" value="${client.clientEmailrefus}" disabled="disabled" />
                         </td>
                     </tr>
+                    </form>
+                    </table>
+                    
                     <table border="1" cellpadding="10" width="60%">
                         <thead bgcolor="B8D2FF">
                         <tr>
@@ -89,7 +106,9 @@
                         </c:forEach>
                         </tbody>
                     </table>
+                   
                 </table>
+				<form action="createevent" method="get">
                 <table>
                     <tr>
                         <td>
@@ -97,7 +116,15 @@
                         </td>
                     </tr>
                 </table>
-            </form>
+                </form>
+                <table>
+				<tr>
+                        <td>
+                            <input form="edit" style="margin: 30px" type="submit" value="Valider les modifications"/>
+                        </td>
+                    </tr>
+                </table>
+                 
 	<form action="clientlist">
 		<HR>
 		<table>
