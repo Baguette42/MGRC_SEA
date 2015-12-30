@@ -40,6 +40,22 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
 			throw re;
 		}
 	}
+    
+    public void update(EvenementEntity transientInstance) {
+		LOGGER.log(Level.INFO, "updating EvenementEntity instance");
+        Transaction transaction = null;
+		try {
+            Session session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(transientInstance);
+            transaction.commit();
+			LOGGER.log(Level.INFO, "update successful");
+		} catch (RuntimeException re) {
+			LOGGER.log(Level.SEVERE, "update failed", re);
+			throw re;
+		}
+	}
+
 
 	public void attachDirty(EvenementEntity instance) {
 		LOGGER.log(Level.INFO, "attaching dirty EvenementEntity instance");

@@ -26,6 +26,11 @@ public class EvenementBO {
 
         DAOFactory.getInstance().getEvenementDAO().persist(evenementEntity);
     }
+    
+    public void updateEvent(EvenementEntity event) {
+
+        DAOFactory.getInstance().getEvenementDAO().update(event);
+    }
 
     public List searchEventsWithRegion(String type_searchform, String date_searchform, String region) {
         ClientEntity clientEntity = new ClientEntity();

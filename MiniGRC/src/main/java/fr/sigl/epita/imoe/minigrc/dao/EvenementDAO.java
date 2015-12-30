@@ -22,4 +22,6 @@ public interface EvenementDAO {
     EvenementEntity findById(int id);
 
     List findByExample(EvenementEntity instance);
+
+	void update(EvenementEntity event);
 }

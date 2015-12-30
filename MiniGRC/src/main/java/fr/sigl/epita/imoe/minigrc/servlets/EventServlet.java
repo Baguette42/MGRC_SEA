@@ -4,6 +4,8 @@ import fr.sigl.epita.imoe.minigrc.beans.EvenementEntity;
 import fr.sigl.epita.imoe.minigrc.bo.EvenementBO;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -47,17 +49,37 @@ public class EventServlet extends HttpServlet {
 
         Cookie[] cookies = request.getCookies();
         Cookie token = null;
+        String username = ""; 
         for (Cookie c : cookies)
-            if (c.getName().equals("user"))
+            if (c.getName().equals("user")) {
+            	username = c.getValue();
                 token = c;
+            }
 
         if (token != null) {
 
-            EvenementBO evenementBO = new EvenementBO();
-            EvenementEntity evenementEntity = evenementBO.getEvenement(request.getParameter("selectedEventId"));
-            request.setAttribute("event", evenementEntity);
+        	String method = request.getMethod();
 
-            request.getRequestDispatcher("event_MINIGRC.jsp").forward(request, response);
+        	if (method.equals("GET")) {
+        		EvenementBO evenementBO = new EvenementBO();
+        		EvenementEntity evenementEntity = evenementBO.getEvenement(request.getParameter("selectedEventId"));
+        		request.setAttribute("event", evenementEntity);
+
+        		request.getRequestDispatcher("event_MINIGRC.jsp").forward(request, response);
+        	} else if (method.equals("POST")) {
+        		EvenementBO evenementBO = new EvenementBO();
+        		EvenementEntity evenementEntity = evenementBO.getEvenement(request.getParameter("selectedEventId"));
+        		//request.setAttribute("event", evenementEntity);
+
+                evenementEntity.setEventType(request.getParameter("event_type"));
+                evenementEntity.setEventDate(Date.valueOf(request.getParameter("event_date")));
+                evenementEntity.setEventDescription(request.getParameter("event_description"));
+                evenementEntity.setEventLastupdate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+                evenementEntity.setEventLastupdater(username);
+        		evenementBO.updateEvent(evenementEntity);
+                response.sendRedirect("eventlist");
+
+        	}
         } else {
             request.setAttribute("errorMessage", "Vous devez être connecté pour accéder à cette page.");
             request.getRequestDispatcher("login_MINIGRC.jsp").forward(request, response);
