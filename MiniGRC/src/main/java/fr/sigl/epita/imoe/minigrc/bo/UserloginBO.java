@@ -12,6 +12,14 @@ import java.util.List;
  */
 public class UserloginBO {
 
+    /**
+     * Vérifie que le login/mot de passe du client est correct
+     *
+     * @param login        Le login de l'utilisateur
+     * @param password     Le mot de passe de l'utilisateur
+     * @return Un teableau de chaines de caractère contenant la region de l'utilisateur
+     * et la date de dernière connexion de l'utilisateur
+     */
     public String[] checkLogin(String login, String password) {
         UserloginEntity userlogin = new UserloginEntity();
         userlogin.setUserLogin(login);

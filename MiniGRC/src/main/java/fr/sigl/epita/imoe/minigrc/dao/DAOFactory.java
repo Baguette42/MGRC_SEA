@@ -9,7 +9,7 @@ import fr.sigl.epita.imoe.minigrc.dao.impl.UserloginDAOImpl;
  * Classe abstraite dont doivent hériter toutes les DAOFactory
  * concrétes.
  *
- * @author Chris
+ * @author Chaf
  */
 public final class DAOFactory {
     /**

@@ -21,10 +21,21 @@ import org.hibernate.criterion.Example;
  */
 public class UserloginDAOImpl extends DAO implements UserloginDAO {
 
+    /**
+     * Logger JUL.
+     */
     private static final Logger LOGGER = Logger.getLogger(UserloginDAOImpl.class.getName());
 
+    /**
+     * Session Hibernate.
+     */
     private final SessionFactory sessionFactory = getSessionFactory();
 
+    /**
+     * Ajoute un nouvel utilisateur à la base.
+     *
+     * @param  transientInstance           Une instance d'utilisateur.
+     */
     public void persist(UserloginEntity transientInstance) {
         LOGGER.log(Level.INFO, "persisting UserloginEntity instance");
         Transaction transaction = null;
@@ -40,6 +51,11 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
         }
     }
 
+    /**
+     * Rattache une instance transiente ou détachée à la session pour une éventulle sauvegarde ou mise à jour
+     *
+     * @param  instance                    Une instance d'utilisateur.
+     */
     public void attachDirty(UserloginEntity instance) {
         LOGGER.log(Level.INFO, "attaching dirty UserloginEntity instance");
         Transaction transaction = null;
@@ -55,6 +71,11 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
         }
     }
 
+    /**
+     * Rattache une instance à la session avec un mode de verrouillage défini.
+     *
+     * @param  instance                    Une instance d'utilisateur.
+     */
     public void attachClean(UserloginEntity instance) {
         LOGGER.log(Level.INFO, "attaching clean UserloginEntity instance");
         Transaction transaction = null;
@@ -70,6 +91,11 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
         }
     }
 
+    /**
+     * Supprime un utilisateur.
+     *
+     * @param  persistentInstance                    Une instance d'utilisateur.
+     */
     public void delete(UserloginEntity persistentInstance) {
         LOGGER.log(Level.INFO, "deleting UserloginEntity instance");
         Transaction transaction = null;
@@ -85,6 +111,11 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
         }
     }
 
+    /**
+     * Fusionne l'état persistent avec l'état détaché d'une instance.
+     *
+     * @param  detachedInstance                    Une instance d'utilisateur.
+     */
     public UserloginEntity merge(UserloginEntity detachedInstance) {
         LOGGER.log(Level.INFO, "merging UserloginEntity instance");
         Transaction transaction = null;
@@ -101,6 +132,12 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
         }
     }
 
+    /**
+     * Retourne l'utilisateur associé à l'identifiant passé en paramètre.
+     *
+     * @param  id                           L'identifiant technique de l'utilisateur.
+     * @return L'instance de l'utilisateur correspondant à l'identifiant technique.
+     */
     public UserloginEntity findById(int id) {
         LOGGER.log(Level.INFO, "getting UserloginEntity instance with id: " + id);
         try {
@@ -117,6 +154,12 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
         }
     }
 
+    /**
+     * Retourne la liste des utilisateurs semblables à l'utilisateur passé en paramètre.
+     *
+     * @param  instance                     L'utilisateur utilisé pour la comparaison.
+     * @return L'instance de l'utilisateur semblable à l'utilisateur passé en paramètre.
+     */
     public List findByExample(UserloginEntity instance) {
         LOGGER.log(Level.INFO, "finding UserloginEntity instance by example");
         try {

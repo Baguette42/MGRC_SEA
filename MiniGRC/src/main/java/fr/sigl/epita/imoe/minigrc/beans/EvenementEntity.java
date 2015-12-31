@@ -10,13 +10,45 @@ import java.sql.Date;
 @Entity
 @Table(name = "evenement", schema = "public", catalog = "minigrc")
 public class EvenementEntity implements Serializable {
+
+    /**
+     * L'identifiant de l'événement
+     */
     private int eventId;
+
+    /**
+     * L'identifiant du client lié à l'événement
+     */
     private int eventClientId;
+
+    /**
+     * Le type de l'événement
+     */
     private String eventType;
+
+    /**
+     * La date de l'événement
+     */
     private Date eventDate;
+
+    /**
+     * Le créateur de l'événement
+     */
     private String eventCreateur;
+
+    /**
+     * La dernière date de modification de l'événement
+     */
     private Date eventLastupdate;
+
+    /**
+     * Le dernier utilisateur à avoir modifié l'événement
+     */
     private String eventLastupdater;
+
+    /**
+     * La description de l'événement
+     */
     private String eventDescription;
 
     @Id

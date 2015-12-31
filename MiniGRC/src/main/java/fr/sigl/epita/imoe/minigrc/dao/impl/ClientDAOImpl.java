@@ -20,10 +20,21 @@ import org.hibernate.criterion.Example;
  */
 public class ClientDAOImpl extends DAO implements ClientDAO {
 
+	/**
+	 * Logger JUL.
+	 */
 	private static final Logger LOGGER = Logger.getLogger(ClientDAOImpl.class.getName());
 
+	/**
+	 * Session Hibernate.
+	 */
 	private final SessionFactory sessionFactory = getSessionFactory();
 
+	/**
+	 * Ajoute un nouvel client à la base.
+	 *
+	 * @param  transientInstance           Une instance de client.
+	 */
     @Override
 	public void persist(ClientEntity transientInstance) {
 		LOGGER.log(Level.INFO, "persisting Client instance");
@@ -40,6 +51,11 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 		}
 	}
 
+	/**
+	 * Rattache une instance transiente ou détachée à la session pour une éventulle sauvegarde ou mise à jour
+	 *
+	 * @param  instance                    Une instance de client.
+	 */
     @Override
 	public void attachDirty(ClientEntity instance) {
 		LOGGER.log(Level.INFO, "attaching dirty Client instance");
@@ -56,6 +72,11 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 		}
 	}
 
+	/**
+	 * Rattache une instance à la session avec un mode de verrouillage défini.
+	 *
+	 * @param  instance                    Une instance de client.
+	 */
     @Override
 	public void attachClean(ClientEntity instance) {
 		LOGGER.log(Level.INFO, "attaching clean Client instance");
@@ -72,6 +93,11 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 		}
 	}
 
+	/**
+	 * Supprime un client.
+	 *
+	 * @param  persistentInstance                    Une instance de client.
+	 */
     @Override
 	public void delete(ClientEntity persistentInstance) {
 		LOGGER.log(Level.INFO, "deleting Client instance");
@@ -87,7 +113,12 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 			throw re;
 		}
 	}
-    
+
+	/**
+	 * Met à jour le client.
+	 *
+	 * @param  persistentInstance                    Une instance de client.
+	 */
 	public void update(ClientEntity persistentInstance) {
 		LOGGER.log(Level.INFO, "updating Client instance");
         Transaction transaction = null;
@@ -103,6 +134,11 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 		}
 	}
 
+	/**
+	 * Fusionne l'état persistent avec l'état détaché de une instance.
+	 *
+	 * @param  detachedInstance                    Une instance de client.
+	 */
     @Override
 	public ClientEntity merge(ClientEntity detachedInstance) {
 		LOGGER.log(Level.SEVERE, "merging Client instance");
@@ -120,6 +156,12 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 		}
 	}
 
+	/**
+	 * Retourne le client associé à l'identifiant passé en paramètre.
+	 *
+	 * @param  id                           L'identifiant technique du client.
+	 * @return L'instance du client correspondant à l'identifiant technique.
+	 */
     @Override
 	public ClientEntity findById(int id) {
 		LOGGER.log(Level.INFO, "getting Client instance with id: " + id);
@@ -137,6 +179,12 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 		}
 	}
 
+	/**
+	 * Retourne la liste des clients semblables au client passé en paramètre.
+	 *
+	 * @param  instance                     Le client utilisé pour la comparaison.
+	 * @return L'instance du client semblable au client passé en paramètre.
+	 */
     @Override
 	public List findByExample(ClientEntity instance) {
 		LOGGER.log(Level.INFO, "finding Client instance by example");

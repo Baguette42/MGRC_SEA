@@ -14,6 +14,15 @@ import java.util.*;
  */
 public class EvenementBO {
 
+    /**
+     * Crée un nouvel événement
+     *
+     * @param clientId        L'identifiant du client concerné par l'événement
+     * @param type            Le type de l'événement
+     * @param createur        Le créateur de l'événement
+     * @param date            La date de l'événement
+     * @param description     La description de l'événement
+     */
     public void createEvent(String clientId, String type, String createur, String date, String description) {
         EvenementEntity evenementEntity = new EvenementEntity();
         evenementEntity.setEventClientId(Integer.parseInt(clientId));
@@ -26,12 +35,26 @@ public class EvenementBO {
 
         DAOFactory.getInstance().getEvenementDAO().persist(evenementEntity);
     }
-    
+
+    /**
+     * Met à jour un événement
+     *
+     * @param event      L'événement à mettre à jour
+     */
     public void updateEvent(EvenementEntity event) {
 
         DAOFactory.getInstance().getEvenementDAO().update(event);
     }
 
+    /**
+     * Retourne la liste des événements dans une région spécifique en fonction de leur type
+     * ou de leur date
+     *
+     * @param type_searchform     Le type de l'événement
+     * @param date_searchform     La date de l'événement
+     * @param region              La région dans laquelle rechercher les événements
+     * @return La liste des événements répondant aux critères
+     */
     public List searchEventsWithRegion(String type_searchform, String date_searchform, String region) {
         ClientEntity clientEntity = new ClientEntity();
         clientEntity.setClientRegion(region);
@@ -60,12 +83,24 @@ public class EvenementBO {
         return evenementList;
     }
 
+    /**
+     * Retourne l'événement associé à l'identifiant passé en paramètre.
+     *
+     * @param  selectedEventId                           L'identifiant technique de l'événement.
+     * @return L'instance de l'événement correspondant à l'identifiant technique.
+     */
     public EvenementEntity getEvenement(String selectedEventId) {
         EvenementEntity evenementEntity = DAOFactory.getInstance().getEvenementDAO().findById(Integer.parseInt(selectedEventId));
 
         return evenementEntity;
     }
 
+    /**
+     * Retourne la liste des dix derniers événements auquel un utilisateur à accés
+     *
+     * @param userName   Le nom de l'utilisateur
+     * @return La liste des dix derniers événements auquel un utilisateur à accés
+     */
     public List getLastTenEvents(String userName) {
         UserloginEntity userloginEntity = new UserloginEntity();
         userloginEntity.setUserLogin(userName);

@@ -10,10 +10,30 @@ import java.sql.Date;
 @Entity
 @Table(name = "userlogin", schema = "public", catalog = "minigrc")
 public class UserloginEntity implements Serializable {
+
+    /**
+     * L'identifiant de l'utilisateur
+     */
     private int userId;
+
+    /**
+     * Le login de l'utilisateur
+     */
     private String userLogin;
+
+    /**
+     * Le mot de passe de l'utilisateur
+     */
     private String userPassword;
+
+    /**
+     * La date de la dernière connexion de l'utilisateur
+     */
     private Date userLastconnexion;
+
+    /**
+     * La région géographique de l'utilisateur
+     */
     private String userRegion;
 
     @Id

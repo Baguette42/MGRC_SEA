@@ -9,6 +9,12 @@ import org.hibernate.service.ServiceRegistryBuilder;
 /**
  * Created by Chaf on 12/27/2015.
  */
+/**
+ * Classe de DAO pour créer la configuration Hibernate nécessaire à la
+ * connexion avec la base de données.
+ *
+ * @author Chaf
+ */
 public class DAO {
     private static final SessionFactory ourSessionFactory;
     private static final ServiceRegistry serviceRegistry;
@@ -26,25 +32,6 @@ public class DAO {
     }
 
     public static SessionFactory getSessionFactory() throws HibernateException {
-        return ourSessionFactory;//.openSession();
+        return ourSessionFactory;
     }
-
-    /*public static void main(final String[] args) throws Exception {
-        final Session session = getSession();
-        try {
-            System.out.println("querying all the managed entities...");
-            final Map metadataMap = session.getSessionFactory().getAllClassMetadata();
-            for (Object key : metadataMap.keySet()) {
-                final ClassMetadata classMetadata = (ClassMetadata) metadataMap.get(key);
-                final String entityName = classMetadata.getEntityName();
-                final Query query = session.createQuery("from " + entityName);
-                System.out.println("executing: " + query.getQueryString());
-                for (Object o : query.list()) {
-                    System.out.println("  " + o);
-                }
-            }
-        } finally {
-            session.close();
-        }
-    }*/
 }

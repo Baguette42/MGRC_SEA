@@ -2,8 +2,19 @@ package fr.sigl.epita.imoe.minigrc.servlets.utils;
 
 public class MailResult {
 
+	/**
+	 * Le nombre d'envois de mails échoués
+	 */
 	private int invalidEmailCount = 0;
+
+	/**
+	 * Le nombre de données manquantes pour remplacer les tags
+	 */
 	private int missingDataCount = 0;
+
+	/**
+	 * Le nombre de mails envoyés
+	 */
 	private int sentMailsCount = 0;
 	
 	public MailResult(int invalidEmailCount, int missingDataCount, int sentMailsCount){

@@ -16,6 +16,15 @@ import java.util.List;
  */
 public class PanelBO {
 
+    /**
+     * Crée un nouveau panel
+     *
+     * @param name         Le nom du panel
+     * @param min_age      L'age minimum des clients dans le panel
+     * @param max_age      L'age maximum des clients dans le panel
+     * @param region       La region des clients dans le panel
+     * @param type         Le profil des clients dans le panel
+     */
     public void createPanel(String name, String min_age, String max_age, String region, String type) {
         PanelEntity panelEntity = new PanelEntity();
         panelEntity.setPanelNom(name);
@@ -27,6 +36,12 @@ public class PanelBO {
         DAOFactory.getInstance().getPanelDAO().persist(panelEntity);
     }
 
+    /**
+     * Retourne la liste des panels dans une région spécifique
+     *
+     * @param region   La région des panels
+     * @return La liste des panels dans une région spécifique
+     */
     public static List searchPanelsWithRegion(String region) {
         List panelList = new ArrayList<>();
         PanelEntity panelEntity = new PanelEntity();
@@ -37,6 +52,13 @@ public class PanelBO {
         return panelList;
     }
 
+    /**
+     * Envoi des emails aux clients dans un panel
+     *
+     * @param panelId    L'identifiant du panel
+     * @param message    Le message à envoyer aux clients
+     * @return Un objet MailResult avec les informations sur les envois de mail
+     */
     public MailResult sendEmails(String panelId, String message) {
         PanelEntity panelEntity = DAOFactory.getInstance().getPanelDAO().findById(Integer.parseInt(panelId));
 
@@ -57,7 +79,13 @@ public class PanelBO {
 
         return MailService.sendMessageToClients(message, result);
     }
-    
+
+    /**
+     * Retourne l'age d'un client en fonction de sa date de naissance
+     *
+     * @param naissance  La date de naissance d'un client
+     * @return l'age d'un client
+     */
     public int findClientAge(Date naissance) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(naissance);

@@ -10,20 +10,79 @@ import java.sql.Date;
 @Entity
 @Table(name = "client", schema = "public", catalog = "minigrc")
 public class ClientEntity implements Serializable {
+    /**
+     * L'identifiant du client
+     */
     private int clientId;
+
+    /**
+     * Le nom du client
+     */
     private String clientNom;
+
+    /**
+     * Le prénom du client
+     */
     private String clientPrenom;
+
+    /**
+     * Le statut civil du client
+     */
     private String clientCivilite;
+
+    /**
+     * La date de naissance du client
+     */
     private Date clientNaissance;
+
+    /**
+     * L'adresse du client
+     */
     private String clientAdresse;
+
+    /**
+     * Le téléphone du client
+     */
     private String clientTelephone;
+
+    /**
+     * L'email du client
+     */
     private String clientEmail;
+
+    /**
+     * L'url facebook du client
+     */
     private String clientFacebook;
+
+    /**
+     * L'url twitter du client
+     */
     private String clientTwitter;
+
+    /**
+     * L'url linkedIn du client
+     */
     private String clientLinkedin;
+
+    /**
+     * Le profil du client
+     */
     private String clientProfil;
+
+    /**
+     * La région géographique du client
+     */
     private String clientRegion;
+
+    /**
+     * Le statut d'acceptation des emails du client
+     */
     private boolean clientEmailrefus;
+
+    /**
+     * La date de création du client
+     */
     private Date clientDatecreation;
 
     @Id

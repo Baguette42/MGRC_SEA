@@ -9,11 +9,35 @@ import java.io.Serializable;
 @Entity
 @Table(name = "panel", schema = "public", catalog = "minigrc")
 public class PanelEntity implements Serializable {
+
+    /**
+     * L'identifiant du panel
+     */
     private int panelId;
+
+    /**
+     * Le nom du panel
+     */
     private String panelNom;
+
+    /**
+     * L'age minimum des clients dans le panel
+     */
     private String panelAgemini;
+
+    /**
+     * L'age maximum des clients dans le panel
+     */
     private String panelAgemaxi;
+
+    /**
+     * La region des clients dans le panel
+     */
     private String panelRegion;
+
+    /**
+     * Le profil des clients dans le panel
+     */
     private String panelProfil;
 
     @Id

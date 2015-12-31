@@ -11,6 +11,14 @@ import javax.mail.internet.*;
 
 public class MailService {
 
+    /**
+     * Remplace les tags par les informations du clients
+     *
+     * @param mailText     Le message avec les tags
+     * @param client       Le client auquel envoyer le mail
+     * @param result       Les résultats de l'envoi du mail
+     * @return Le message à envoyer au client
+     */
     public static String replaceMailTagsForClient(String mailText, ClientEntity client, MailResult result) {
 
         String mailTextForClient = mailText;
@@ -52,9 +60,16 @@ public class MailService {
         return mailTextForClient;
     }
 
+    /**
+     * Envoi un message aux clients
+     *
+     * @param mailMessage   Le message à envoyer
+     * @param clients       La liste des clients auquels envoyer le message
+     * @return Le résultat de l'envoi des messages auc clients
+     */
     public static MailResult sendMessageToClients(String mailMessage, List<ClientEntity> clients) {
 
-    	MailResult result = new MailResult(0, 0, 0);
+        MailResult result = new MailResult(0, 0, 0);
         int sentEmailsCount = 0;
         int invalidEmailCount = 0;
 
@@ -87,99 +102,41 @@ public class MailService {
 
             String messageToSend = replaceMailTagsForClient(mailMessage, client, result);
             String to = client.getClientEmail();
-			
-			try {
-		           // Create a default MimeMessage object.
-		           Message message = new MimeMessage(session);
 
-		           // Set From: header field of the header.
-		           message.setFrom(new InternetAddress(from));
+            try {
+                // Create a default MimeMessage object.
+                Message message = new MimeMessage(session);
 
-		           // Set To: header field of the header.
-		           message.setRecipients(Message.RecipientType.TO,
-		           InternetAddress.parse(to));
+                // Set From: header field of the header.
+                message.setFrom(new InternetAddress(from));
 
-		           // Set Subject: header field
-		           message.setSubject("MiniGRC");
+                // Set To: header field of the header.
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(to));
 
-		           // Now set the actual message
-		           message.setText(messageToSend);
+                // Set Subject: header field
+                message.setSubject("MiniGRC");
 
-		           // Send message
-		           Transport.send(message);
+                // Now set the actual message
+                message.setText(messageToSend);
 
-		           System.out.println("Sent message successfully....");
-		           
-		           sentEmailsCount++;
+                // Send message
+                Transport.send(message);
 
-		        } catch (MessagingException e) {
-		        	invalidEmailCount++;
-		        	System.out.println("Sent not message successfully....");
-		        }
+                System.out.println("Sent message successfully....");
+
+                sentEmailsCount++;
+
+            } catch (MessagingException e) {
+                invalidEmailCount++;
+                System.out.println("Sent not message successfully....");
+            }
 
         }
 
         result.setSentMailsCount(sentEmailsCount);
         result.setInvalidEmailCount(invalidEmailCount);
-        
+
         return result;
     }
-
-    /***
-     * Function used to test the gmail smtp
-     */
-    private static void sendMailTest(){
-        // Recipient's email ID needs to be mentioned.
-        String to = "guillaume.moizan@gmail.com";//change accordingly
-
-        // Sender's email ID needs to be mentioned
-        String from = "seattle.minigrc@gmail.com";
-        final String username = "seattle.minigrc@gmail.com";
-        final String password = "seattle42";
-
-        // Using gmail
-        String host = "smtp.gmail.com";
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-
-        // Get the Session object.
-        Session session = Session.getInstance(props,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
-
-        try {
-            // Create a default MimeMessage object.
-            Message message = new MimeMessage(session);
-
-            // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
-
-            // Set To: header field of the header.
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(to));
-
-            // Set Subject: header field
-            message.setSubject("Testing Subject");
-
-            // Now set the actual message
-            message.setText("Hello, this is sample for to check send "
-                    + "email using JavaMailAPI ");
-
-            // Send message
-            Transport.send(message);
-
-            System.out.println("Sent message successfully....");
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }

@@ -22,10 +22,21 @@ import org.hibernate.criterion.Example;
  */
 public class EvenementDAOImpl extends DAO implements EvenementDAO {
 
+	/**
+	 * Logger JUL.
+	 */
 	private static final Logger LOGGER = Logger.getLogger(EvenementDAOImpl.class.getName());
 
+	/**
+	 * Session Hibernate.
+	 */
 	private final SessionFactory sessionFactory = getSessionFactory();
 
+	/**
+	 * Ajoute un nouvel événement à la base.
+	 *
+	 * @param  transientInstance           Une instance d'événement.
+	 */
     public void persist(EvenementEntity transientInstance) {
 		LOGGER.log(Level.INFO, "persisting EvenementEntity instance");
         Transaction transaction = null;
@@ -40,7 +51,12 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
 			throw re;
 		}
 	}
-    
+
+    /**
+     * Met à jour l'événement.
+     *
+     * @param  transientInstance                    Une instance d'événement.
+     */
     public void update(EvenementEntity transientInstance) {
 		LOGGER.log(Level.INFO, "updating EvenementEntity instance");
         Transaction transaction = null;
@@ -56,7 +72,11 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
 		}
 	}
 
-
+    /**
+     * Rattache une instance transiente ou détachée à la session pour une éventulle sauvegarde ou mise à jour
+     *
+     * @param  instance                    Une instance d'événement.
+     */
 	public void attachDirty(EvenementEntity instance) {
 		LOGGER.log(Level.INFO, "attaching dirty EvenementEntity instance");
         Transaction transaction = null;
@@ -72,6 +92,11 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
 		}
 	}
 
+    /**
+     * Rattache une instance à la session avec un mode de verrouillage défini.
+     *
+     * @param  instance                    Une instance d'événement.
+     */
 	public void attachClean(EvenementEntity instance) {
 		LOGGER.log(Level.INFO, "attaching clean EvenementEntity instance");
         Transaction transaction = null;
@@ -87,6 +112,11 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
 		}
 	}
 
+    /**
+     * Supprime un événement.
+     *
+     * @param  persistentInstance                    Une instance d'événement.
+     */
 	public void delete(EvenementEntity persistentInstance) {
 		LOGGER.log(Level.INFO, "deleting EvenementEntity instance");
         Transaction transaction = null;
@@ -102,6 +132,11 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
 		}
 	}
 
+    /**
+     * Fusionne l'état persistent avec l'état détaché d'une instance.
+     *
+     * @param  detachedInstance                    Une instance d'événement.
+     */
 	public EvenementEntity merge(EvenementEntity detachedInstance) {
 		LOGGER.log(Level.INFO, "merging EvenementEntity instance");
         Transaction transaction = null;
@@ -118,6 +153,12 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
 		}
 	}
 
+    /**
+     * Retourne l'événement associé à l'identifiant passé en paramètre.
+     *
+     * @param  id                           L'identifiant technique de l'événement.
+     * @return L'instance de l'événement correspondant à l'identifiant technique.
+     */
 	public EvenementEntity findById(int id) {
 		LOGGER.log(Level.INFO, "getting EvenementEntity instance with id: " + id);
 		try {
@@ -134,6 +175,12 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
 		}
 	}
 
+    /**
+     * Retourne la liste des événements semblables à l'événement passé en paramètre.
+     *
+     * @param  instance                     L'événement utilisé pour la comparaison.
+     * @return L'instance de l'événement semblable à l'événement passé en paramètre.
+     */
 	public List findByExample(EvenementEntity instance) {
 		LOGGER.log(Level.INFO, "finding EvenementEntity instance by example");
 		try {
