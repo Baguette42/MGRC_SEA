@@ -16,7 +16,6 @@ import org.hibernate.criterion.Example;
 
 /**
  * DAO object for domain model class UserloginEntity.
- * @see .UserloginEntity
  * @author Hibernate Tools
  */
 public class UserloginDAOImpl extends DAO implements UserloginDAO {

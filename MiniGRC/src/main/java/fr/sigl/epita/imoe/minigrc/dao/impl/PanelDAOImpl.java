@@ -17,7 +17,6 @@ import org.hibernate.criterion.Example;
 
 /**
  * DAO for domain model class PanelEntity.
- * @see .PanelEntity
  * @author Hibernate Tools
  */
 public class PanelDAOImpl extends DAO implements PanelDAO {

@@ -17,7 +17,6 @@ import org.hibernate.criterion.Example;
 
 /**
  * DAO for domain model class EvenementEntity.
- * @see .EvenementEntity
  * @author Hibernate Tools
  */
 public class EvenementDAOImpl extends DAO implements EvenementDAO {

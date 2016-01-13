@@ -15,7 +15,6 @@ import org.hibernate.criterion.Example;
 
 /**
  * DAO for domain model class ClientEntity.
- * @see .ClientEntity
  * @author Hibernate Tools
  */
 public class ClientDAOImpl extends DAO implements ClientDAO {
