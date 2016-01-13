@@ -44,6 +44,7 @@ public class PanelDAOImpl extends DAO implements PanelDAO {
             transaction = session.beginTransaction();
             session.persist(transientInstance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "persist successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "persist failed", re);
@@ -64,6 +65,7 @@ public class PanelDAOImpl extends DAO implements PanelDAO {
             transaction = session.beginTransaction();
             session.saveOrUpdate(instance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "attach successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -84,6 +86,7 @@ public class PanelDAOImpl extends DAO implements PanelDAO {
             transaction = session.beginTransaction();
             session.lock(instance, LockMode.NONE);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "attach successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -104,6 +107,7 @@ public class PanelDAOImpl extends DAO implements PanelDAO {
             transaction = session.beginTransaction();
             session.delete(persistentInstance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "delete successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "delete failed", re);
@@ -124,6 +128,7 @@ public class PanelDAOImpl extends DAO implements PanelDAO {
             transaction = session.beginTransaction();
             PanelEntity result = (PanelEntity) session.merge(detachedInstance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -141,12 +146,14 @@ public class PanelDAOImpl extends DAO implements PanelDAO {
 	public PanelEntity findById(int id) {
 		LOGGER.log(Level.INFO, "getting PanelEntity instance with id: " + id);
 		try {
-			PanelEntity instance = (PanelEntity) sessionFactory.openSession().get(PanelEntity.class, id);
+			Session session = sessionFactory.openSession();
+			PanelEntity instance = (PanelEntity) session.get(PanelEntity.class, id);
 			if (instance == null) {
 				LOGGER.log(Level.INFO, "get successful, no instance found");
 			} else {
 				LOGGER.log(Level.INFO, "get successful, instance found");
 			}
+			session.close();
 			return instance;
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "get failed", re);
@@ -163,9 +170,11 @@ public class PanelDAOImpl extends DAO implements PanelDAO {
 	public List findByExample(PanelEntity instance) {
 		LOGGER.log(Level.INFO, "finding PanelEntity instance by example");
 		try {
-			List results = sessionFactory.openSession().createCriteria(PanelEntity.class).add(Example.create(instance))
+			Session session = sessionFactory.openSession();
+			List results = session.createCriteria(PanelEntity.class).add(Example.create(instance))
 					.list();
 			LOGGER.log(Level.INFO, "find by example successful, result size: " + results.size());
+			session.close();
 			return results;
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "find by example failed", re);

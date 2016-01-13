@@ -43,6 +43,7 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
             transaction = session.beginTransaction();
             session.persist(transientInstance);
             transaction.commit();
+            session.close();
             LOGGER.log(Level.INFO, "persist successful");
         } catch (RuntimeException re) {
             LOGGER.log(Level.SEVERE, "persist failed", re);
@@ -63,6 +64,7 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
             transaction = session.beginTransaction();
             session.saveOrUpdate(instance);
             transaction.commit();
+            session.close();
             LOGGER.log(Level.INFO, "attach successful");
         } catch (RuntimeException re) {
             LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -83,6 +85,7 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
             transaction = session.beginTransaction();
             session.lock(instance, LockMode.NONE);
             transaction.commit();
+            session.close();
             LOGGER.log(Level.INFO, "attach successful");
         } catch (RuntimeException re) {
             LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -103,6 +106,7 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
             transaction = session.beginTransaction();
             session.delete(persistentInstance);
             transaction.commit();
+            session.close();
             LOGGER.log(Level.INFO, "delete successful");
         } catch (RuntimeException re) {
             LOGGER.log(Level.SEVERE, "delete failed", re);
@@ -123,6 +127,7 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
             transaction = session.beginTransaction();
             UserloginEntity result = (UserloginEntity) session.merge(detachedInstance);
             transaction.commit();
+            session.close();
             LOGGER.log(Level.INFO, "merge successful");
             return result;
         } catch (RuntimeException re) {
@@ -140,12 +145,14 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
     public UserloginEntity findById(int id) {
         LOGGER.log(Level.INFO, "getting UserloginEntity instance with id: " + id);
         try {
-            UserloginEntity instance = (UserloginEntity) sessionFactory.openSession().get(UserloginEntity.class, id);
+            Session session = sessionFactory.openSession();
+            UserloginEntity instance = (UserloginEntity) session.get(UserloginEntity.class, id);
             if (instance == null) {
                 LOGGER.log(Level.INFO, "get successful, no instance found");
             } else {
                 LOGGER.log(Level.INFO, "get successful, instance found");
             }
+            session.close();
             return instance;
         } catch (RuntimeException re) {
             LOGGER.log(Level.SEVERE, "get failed", re);
@@ -162,9 +169,11 @@ public class UserloginDAOImpl extends DAO implements UserloginDAO {
     public List findByExample(UserloginEntity instance) {
         LOGGER.log(Level.INFO, "finding UserloginEntity instance by example");
         try {
-            List results = sessionFactory.openSession().createCriteria(UserloginEntity.class).add(Example.create(instance))
+            Session session = sessionFactory.openSession();
+            List results = session.createCriteria(UserloginEntity.class).add(Example.create(instance))
                     .list();
             LOGGER.log(Level.INFO, "find by example successful, result size: " + results.size());
+            session.close();
             return results;
         } catch (RuntimeException re) {
             LOGGER.log(Level.SEVERE, "find by example failed", re);

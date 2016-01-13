@@ -44,6 +44,7 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
             transaction = session.beginTransaction();
             session.persist(transientInstance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "persist successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "persist failed", re);
@@ -64,6 +65,7 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
             transaction = session.beginTransaction();
             session.saveOrUpdate(transientInstance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "update successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "update failed", re);
@@ -84,6 +86,7 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
             transaction = session.beginTransaction();
             session.saveOrUpdate(instance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "attach successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -104,6 +107,7 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
             transaction = session.beginTransaction();
             session.lock(instance, LockMode.NONE);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "attach successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -124,6 +128,7 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
             transaction = session.beginTransaction();
             session.delete(persistentInstance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "delete successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "delete failed", re);
@@ -144,6 +149,7 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
             transaction = session.beginTransaction();
             EvenementEntity result = (EvenementEntity) session.merge(detachedInstance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -161,12 +167,14 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
 	public EvenementEntity findById(int id) {
 		LOGGER.log(Level.INFO, "getting EvenementEntity instance with id: " + id);
 		try {
-			EvenementEntity instance = (EvenementEntity) sessionFactory.openSession().get(EvenementEntity.class, id);
+			Session session = sessionFactory.openSession();
+			EvenementEntity instance = (EvenementEntity) session.get(EvenementEntity.class, id);
 			if (instance == null) {
 				LOGGER.log(Level.INFO, "get successful, no instance found");
 			} else {
 				LOGGER.log(Level.INFO, "get successful, instance found");
 			}
+			session.close();
 			return instance;
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "get failed", re);
@@ -183,9 +191,11 @@ public class EvenementDAOImpl extends DAO implements EvenementDAO {
 	public List findByExample(EvenementEntity instance) {
 		LOGGER.log(Level.INFO, "finding EvenementEntity instance by example");
 		try {
-			List results = sessionFactory.openSession().createCriteria(EvenementEntity.class).add(Example.create(instance))
+			Session session = sessionFactory.openSession();
+			List results = session.createCriteria(EvenementEntity.class).add(Example.create(instance))
 					.list();
 			LOGGER.log(Level.INFO, "find by example successful, result size: " + results.size());
+			session.close();
 			return results;
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "find by example failed", re);

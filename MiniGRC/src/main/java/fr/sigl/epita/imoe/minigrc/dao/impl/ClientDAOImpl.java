@@ -43,6 +43,7 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
             transaction = session.beginTransaction();
             session.persist(transientInstance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "persist successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "persist failed", re);
@@ -64,6 +65,7 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
             transaction = session.beginTransaction();
             session.saveOrUpdate(instance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "attach successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -85,6 +87,7 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
             transaction = session.beginTransaction();
             session.lock(instance, LockMode.NONE);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "attach successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "attach failed", re);
@@ -106,6 +109,7 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
             transaction = session.beginTransaction();
             session.delete(persistentInstance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "delete successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "delete failed", re);
@@ -126,6 +130,7 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
             transaction = session.beginTransaction();
             session.saveOrUpdate(persistentInstance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "updating successful");
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "updating failed", re);
@@ -147,6 +152,7 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
             transaction = session.beginTransaction();
             ClientEntity result = (ClientEntity) session.merge(detachedInstance);
             transaction.commit();
+			session.close();
 			LOGGER.log(Level.INFO, "merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -165,12 +171,14 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 	public ClientEntity findById(int id) {
 		LOGGER.log(Level.INFO, "getting Client instance with id: " + id);
 		try {
-			ClientEntity instance = (ClientEntity) sessionFactory.openSession().get(ClientEntity.class, id);
+			Session session = sessionFactory.openSession();
+			ClientEntity instance = (ClientEntity) session.get(ClientEntity.class, id);
 			if (instance == null) {
 				LOGGER.log(Level.INFO, "get successful, no instance found");
 			} else {
 				LOGGER.log(Level.INFO, "get successful, instance found");
 			}
+			session.close();
 			return instance;
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "get failed", re);
@@ -188,9 +196,11 @@ public class ClientDAOImpl extends DAO implements ClientDAO {
 	public List findByExample(ClientEntity instance) {
 		LOGGER.log(Level.INFO, "finding Client instance by example");
 		try {
-			List results = sessionFactory.openSession().createCriteria(ClientEntity.class).add(Example.create(instance))
+			Session session = sessionFactory.openSession();
+			List results = session.createCriteria(ClientEntity.class).add(Example.create(instance))
 					.list();
 			LOGGER.log(Level.INFO, "find by example successful, result size: " + results.size());
+			session.close();
 			return results;
 		} catch (RuntimeException re) {
 			LOGGER.log(Level.SEVERE, "find by example failed", re);
